@@ -3,7 +3,13 @@
 
 @section('Content')
     
-
+<br>
+<br>
+<br>
+<br>
+@if (session('error'))
+<p style="color: red;">{{session('error')}}</p>
+@endif
 {{-- 
 <div class="slideshow slideshow-wrapper pb-section sliderFull">
         	<div class="home-slideshow">

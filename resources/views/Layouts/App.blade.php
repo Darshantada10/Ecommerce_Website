@@ -87,8 +87,27 @@
                                 </div>
                             </li>
                             
-                        <li class="lvl1"><a href="{{route('register')}}"><b>Register</b> <i class="anm anm-angle-down-l"></i></a></li>
-                        <li class="lvl1"><a href="{{route('login')}}"><b>Login</b> <i class="anm anm-angle-down-l"></i></a></li>
+                            @auth
+                            
+                            <li class="lvl1"><a href="{{route('logout')}}"><b>Logout</b> <i class="anm anm-angle-down-l"></i></a></li>
+
+                            @else
+
+                            <li class="lvl1"><a href="{{route('register')}}"><b>Register</b> <i class="anm anm-angle-down-l"></i></a></li>
+                            <li class="lvl1"><a href="{{route('login')}}"><b>Login</b> <i class="anm anm-angle-down-l"></i></a></li>
+
+                            @endauth
+                           
+                            {{-- @guest
+
+                            <li class="lvl1"><a href="{{route('register')}}"><b>Register</b> <i class="anm anm-angle-down-l"></i></a></li>
+                            <li class="lvl1"><a href="{{route('login')}}"><b>Login</b> <i class="anm anm-angle-down-l"></i></a></li>
+                            
+                            @else
+                            
+                            <li class="lvl1"><a href="{{route('logout')}}"><b>Logout</b> <i class="anm anm-angle-down-l"></i></a></li>
+
+                            @endguest --}}
                         {{-- <li class="lvl1"><a href="/login"><b>Login</b> <i class="anm anm-angle-down-l"></i></a></li> --}}
 
                       </ul>

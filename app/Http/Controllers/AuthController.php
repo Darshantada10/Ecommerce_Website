@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Session;
 
 class AuthController extends Controller
 {
@@ -19,6 +20,15 @@ class AuthController extends Controller
     public function Login()
     {
         return view('Auth.Login');
+    }
+
+    public function Logout()
+    {
+        Auth::logout();
+        Session::flush();
+        return redirect('/login');
+        // request()->session()->invalidate();
+
     }
     public function SaveUser(Request $request)
     {        
