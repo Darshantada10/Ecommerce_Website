@@ -10,7 +10,7 @@ use App\Http\Controllers\HomeController;
 // });
 
 
-Route::get('/',[HomeController::class,'Index']);
+Route::get('/',[HomeController::class,'Index'])->name('home');
 
 Route::get('/login',[AuthController::class,'Login'])->name('login');
 Route::post('/login',[AuthController::class,'VerifyUser']);
@@ -20,4 +20,6 @@ Route::post('/register',[AuthController::class,'SaveUser']);
 
 Route::get('/logout',[AuthController::class,'Logout'])->name('logout');
 
-Route::get('/admin/dashboard',[AdminController::class,'Index'])->middleware('admin');
+Route::get('/admin/dashboard',[AdminController::class,'Index'])->middleware('admin')->name("admin.dashboard");
+Route::get('/admin/profile',[AdminController::class,'Profile'])->middleware('admin')->name("admin.profile");
+Route::post('/admin/profile',[AdminController::class,'Profile'])->middleware('admin')->name("admin.profile.submit");

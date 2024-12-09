@@ -12,4 +12,9 @@ class AdminController extends Controller
     {
         return view('Admin.Index');
     }
+
+    public function Profile()
+    {
+        return view('Admin.Profile');
+    }
 }

@@ -38,6 +38,7 @@ class AuthController extends Controller
             'password'=> $request->password,
         ]);
 
+        // Mail::to($request->email)->queue(new WelcomeMail($request->name));
         // Mail::to($request->email)->send(new WelcomeMail($request->name));
 
         // $user = new User;

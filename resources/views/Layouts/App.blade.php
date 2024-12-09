@@ -27,7 +27,7 @@
         <div class="container-fluid">
             <div class="row">
             	<div class="col-10 col-sm-8 col-md-5 col-lg-4">
-                    <p class="phone-no"><i class="anm anm-phone-s"></i> +91 9876543210</p>
+                    <p class="phone-no"><i class="fa fa-phone"></i> +91 9876543210</p>
                 </div>
                 <div class="col-sm-4 col-md-4 col-lg-4 d-none d-lg-none d-md-block d-lg-block">
                 	<div class="text-center"><p class="top-header_middle-text"> Worldwide Express Shipping</p></div>
@@ -35,9 +35,18 @@
                 <div class="col-2 col-sm-4 col-md-3 col-lg-4 text-right">
                 	<span class="user-menu d-block d-lg-none"><i class="anm anm-user-al" aria-hidden="true"></i></span>
                     <ul class="customer-links list-inline">
-                        <li><a href="login.html">Login</a></li>
-                        <li><a href="register.html">Create Account</a></li>
-                        <li><a href="wishlist.html">Wishlist</a></li>
+                        @auth
+                        
+                        <li><a href="{{route('logout')}}">Logout</a></li>
+                        
+                        @else
+                        
+                        <li><a href="{{route('login')}}">Login</a></li>
+                        <li><a href="{{route('register')}}">Create Account</a></li>
+
+                        @endauth
+
+                        <li><a href="wishlist">Wishlist</a></li>
                     </ul>
                 </div>
             </div>
@@ -52,7 +61,7 @@
 
             	<!--Desktop Logo-->
                 <div class="logo col-md-2 col-lg-2 d-none d-lg-block">
-                    <a href="index.html">
+                    <a href="{{route('home')}}">
                     	<img src="{{asset('FrontEnd/assets/images/logo.svg')}}" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
                     </a>
                 </div>
@@ -78,7 +87,7 @@
                                             <ul class="grid">
                                                 <li class="grid__item lvl-1 col-md-3 col-lg-3"><a href="#" class="site-nav lvl-1">Home Group 1</a>
                                                     <ul class="subLinks">
-                                                      <li class="lvl-2"><a href="index.html" class="site-nav lvl-2">Home 1 - Classic</a></li>
+                                                      <li class="lvl-2"><a href="{{route('home')}}" class="site-nav lvl-2">Home 1 - Classic</a></li>
                                                     </ul>
                                                   </li>
                                             </ul>
@@ -87,7 +96,7 @@
                                 </div>
                             </li>
                             
-                            @auth
+                            {{-- @auth
                             
                             <li class="lvl1"><a href="{{route('logout')}}"><b>Logout</b> <i class="anm anm-angle-down-l"></i></a></li>
 
@@ -96,7 +105,7 @@
                             <li class="lvl1"><a href="{{route('register')}}"><b>Register</b> <i class="anm anm-angle-down-l"></i></a></li>
                             <li class="lvl1"><a href="{{route('login')}}"><b>Login</b> <i class="anm anm-angle-down-l"></i></a></li>
 
-                            @endauth
+                            @endauth --}}
                            
                             {{-- @guest
 
@@ -120,7 +129,7 @@
                 <!--Mobile Logo-->
                 <div class="col-6 col-sm-6 col-md-6 col-lg-2 d-block d-lg-none mobile-logo">
                 	<div class="logo">
-                        <a href="index.html">
+                        <a href="{{route('home')}}">
                             <img src="{{asset('FrontEnd/assets/images/logo.svg')}}" alt="Belle Multipurpose Html Template" title="Belle Multipurpose Html Template" />
                         </a>
                     </div>
@@ -143,7 +152,7 @@
                                     <div class="product-details">
                                     	<a href="#" class="remove"><i class="anm anm-times-l" aria-hidden="true"></i></a>
                                         <a href="#" class="edit-i remove"><i class="anm anm-edit" aria-hidden="true"></i></a>
-                                        <a class="pName" href="cart.html">Sleeve Kimono Dress</a>
+                                        <a class="pName" href="cart">Sleeve Kimono Dress</a>
                                         <div class="variant-cart">Black / XL</div>
                                         <div class="wrapQtyBtn">
                                             <div class="qtyField">
@@ -166,8 +175,8 @@
                                 	<span class="label">Cart Subtotal:</span><span class="product-price"><span class="money">$748.00</span></span>
                                 </div>
                                  <div class="buttonSet text-center">
-                                    <a href="cart.html" class="btn btn-secondary btn--small">View Cart</a>
-                                    <a href="checkout.html" class="btn btn-secondary btn--small">Checkout</a>
+                                    <a href="cart" class="btn btn-secondary btn--small">View Cart</a>
+                                    <a href="checkout" class="btn btn-secondary btn--small">Checkout</a>
                                 </div>
                             </div>
                         </div>
@@ -188,11 +197,11 @@
     <div class="mobile-nav-wrapper" role="navigation">
 		<div class="closemobileMenu"><i class="icon anm anm-times-l pull-right"></i> Close Menu</div>
         <ul id="MobileNav" class="mobile-nav">
-        	<li class="lvl1 parent megamenu"><a href="index.html">Home <i class="anm anm-plus-l"></i></a>
+        	<li class="lvl1 parent megamenu"><a href="{{route('home')}}">Home <i class="anm anm-plus-l"></i></a>
           <ul>
             <li><a href="#" class="site-nav">Home Group 1<i class="anm anm-plus-l"></i></a>
               <ul>
-                <li><a href="index.html" class="site-nav">Home 1 - Classic</a></li>
+                <li><a href="{{route('home')}}" class="site-nav">Home 1 - Classic</a></li>
               </ul>
             </li>
           </ul>
@@ -522,5 +531,4 @@
 </div>
 </body>
 
-<!-- belle/index.html   11 Nov 2019 12:20:55 GMT -->
 </html>
