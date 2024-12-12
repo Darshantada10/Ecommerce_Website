@@ -134,18 +134,18 @@
             </li>
 
             <li class="menu-header small text-uppercase">
-              <span class="menu-header-text">Pages</span>
+              <span class="menu-header-text">Sections</span>
             </li>
 
             <li class="menu-item">
               <a href="javascript:void(0);" class="menu-link menu-toggle">
                 <i class="menu-icon tf-icons bx bx-dock-top"></i>
-                <div data-i18n="Account Settings">Account Settings</div>
+                <div data-i18n="Account Settings">Hero Section</div>
               </a>
               <ul class="menu-sub">
                 <li class="menu-item">
-                  <a href="pages-account-settings-account" class="menu-link">
-                    <div data-i18n="Account">Account</div>
+                  <a href="{{route("admin.all.herosections")}}" class="menu-link">
+                    <div data-i18n="Account">All Hero Section</div>
                   </a>
                 </li>
               </ul>
@@ -189,7 +189,7 @@
                 <li class="nav-item navbar-dropdown dropdown-user dropdown">
                   <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
                     <div class="avatar avatar-online">
-                      <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                      <img src="{{asset(Auth::user()->profile_picture)}}" alt class="w-px-40 rounded-circle" />
                     </div>
                   </a>
                   <ul class="dropdown-menu dropdown-menu-end">
@@ -198,7 +198,7 @@
                         <div class="d-flex">
                           <div class="flex-shrink-0 me-3">
                             <div class="avatar avatar-online">
-                              <img src="../assets/img/avatars/1.png" alt class="w-px-40 h-auto rounded-circle" />
+                              <img src="{{asset(Auth::user()->profile_picture)}}" alt class="w-px-40  rounded-circle" />
                             </div>
                           </div>
                           <div class="flex-grow-1">

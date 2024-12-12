@@ -2,6 +2,10 @@
 
 @section('Content')
 
+@if (session('success'))
+<p class="text-primary">{{session('success')}}</p>
+@endif
+
 <div class="col-md-12">
     <div class="card mb-4">
       <div class="card-header d-flex align-items-center justify-content-between">
@@ -9,7 +13,7 @@
       </div>
       <div class="card-body">
 
-        <form action="{{route('admin.profile.submit')}}" method="POST">
+        <form action="{{route('admin.profile.submit')}}" method="POST" enctype="multipart/form-data">
             @csrf
 
           <div class="row mb-3">
@@ -46,6 +50,11 @@
           <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="profile_picture">Profile Picture</label>
             <div class="col-sm-10">
+
+              @if (Auth::user()->profile_picture)
+                  <img src="{{asset(Auth::user()->profile_picture)}}" alt="profile picture" class="img-thumbnail mb-3" style="max-width: 200px;">
+              @endif
+              
               <div class="input-group input-group-merge">
                 <span class="input-group-text"><i class="bx bx-image-alt"></i></span>
                     <input type="file" id="profile_picture" name="profile_picture" class="form-control" placeholder="Enter Your Email" />

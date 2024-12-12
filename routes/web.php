@@ -1,14 +1,10 @@
 <?php
 
-use App\Http\Controllers\Admin\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
-
-// Route::get('/', function () {
-//     return view('Home.Index');
-// });
-
+use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\HeroSectionController;
 
 Route::get('/',[HomeController::class,'Index'])->name('home');
 
@@ -22,4 +18,6 @@ Route::get('/logout',[AuthController::class,'Logout'])->name('logout');
 
 Route::get('/admin/dashboard',[AdminController::class,'Index'])->middleware('admin')->name("admin.dashboard");
 Route::get('/admin/profile',[AdminController::class,'Profile'])->middleware('admin')->name("admin.profile");
-Route::post('/admin/profile',[AdminController::class,'Profile'])->middleware('admin')->name("admin.profile.submit");
+Route::post('/admin/profile',[AdminController::class,'ProfileSave'])->middleware('admin')->name("admin.profile.submit");
+
+Route::get('/admin/all/hero-sections',[HeroSectionController::class,'Index'])->name('admin.all.herosections');
