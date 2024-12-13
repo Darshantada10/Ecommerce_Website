@@ -21,3 +21,10 @@ Route::get('/admin/profile',[AdminController::class,'Profile'])->middleware('adm
 Route::post('/admin/profile',[AdminController::class,'ProfileSave'])->middleware('admin')->name("admin.profile.submit");
 
 Route::get('/admin/all/hero-sections',[HeroSectionController::class,'Index'])->name('admin.all.herosections');
+Route::get('/admin/hero-section/create',[HeroSectionController::class,'Create'])->name('admin.create.herosections');
+Route::post('/admin/hero-section/create',[HeroSectionController::class,'Save'])->name('admin.save.herosections');
+
+Route::get('admin/hero-section/edit/{id}',[HeroSectionController::class,'Edit'])->name('admin.update.herosections');
+Route::post('admin/hero-section/update/{id}',[HeroSectionController::class,'Update'])->name('admin.edit.herosections');
+
+Route::get('admin/hero-section/delete/{id}',[HeroSectionController::class,'Delete'])->name('admin.delete.herosections');
