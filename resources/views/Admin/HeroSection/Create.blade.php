@@ -54,6 +54,16 @@
           </div>
 
           <div class="row mb-3">
+            <label class="col-sm-2 col-form-label" for="size">Size</label>
+            <div class="col-sm-10">
+              <input type="text" class="form-control" id="size" name="size" required/>
+              @error('size')
+                  <small class="text-danger">{{$message}}</small>
+              @enderror
+            </div>
+          </div>
+
+          <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="status">Status</label>
             <div class="col-sm-10">
               <input type="checkbox" id="status" name="status" />
