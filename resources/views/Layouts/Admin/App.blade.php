@@ -150,6 +150,25 @@
                 </li>
               </ul>
             </li>
+           
+            <li class="menu-header small text-uppercase">
+              <span class="menu-header-text">Category</span>
+            </li>
+
+            <li class="menu-item">
+              <a href="javascript:void(0);" class="menu-link menu-toggle">
+                <i class="menu-icon tf-icons bx bx-dock-top"></i>
+                <div data-i18n="Account Settings">Category</div>
+              </a>
+              <ul class="menu-sub">
+                <li class="menu-item">
+                  <a href="{{route("admin.all.categories")}}" class="menu-link">
+                    <div data-i18n="Account">All Categories</div>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
           </ul>
         </aside>
         <!-- / Menu -->

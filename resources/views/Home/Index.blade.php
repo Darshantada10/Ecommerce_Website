@@ -127,6 +127,6 @@
     @endif --}}
 
 
-@endforeach
+{{-- @endforeach --}}
 
 @endsection
