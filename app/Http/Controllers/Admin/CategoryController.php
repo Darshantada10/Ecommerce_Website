@@ -30,6 +30,12 @@ class CategoryController extends Controller
     public function Delete($id)
     {
         $data = Category::findOrFail($id);
+        
+        if($data->image)
+        {
+            File::delete(public_path($data->image));
+        }
+
         $data->delete();
         return redirect('/admin/all/categories')->with('success','Category Deleted Successfully');
     }
@@ -48,7 +54,7 @@ class CategoryController extends Controller
             'name' => $request->name,
             'slug' => Str::slug($request->name),
             'description' => $request->description,
-            'image' => $image,
+            'image' => $image ?? null,
 
         ]);
         return redirect('/admin/all/categories')->with('success','Category Added Successfully');

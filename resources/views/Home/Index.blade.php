@@ -66,6 +66,8 @@
     </div>
 </div>
 
+@if ($HeroSection[4]['image'])
+
 <div class="section imgBanners">
     <div class="container-fluid">
         <div class="col-12 col-sm-12 col-md-12 col-lg-12 text-center">
@@ -74,7 +76,10 @@
             </a>
         </div>
     </div>
-</div>
+</div>  
+  
+@endif
+
 
 
 {{-- @foreach ($HeroSection as $item)

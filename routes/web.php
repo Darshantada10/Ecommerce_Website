@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AdminController;
+use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\HeroSectionController;
 
 Route::get('/',[HomeController::class,'Index'])->name('index');
@@ -55,6 +56,19 @@ Route::prefix('/admin')->middleware('admin')->group(function(){
         Route::post('/category/update/{id}','Update')->name('admin.edit.category');
 
         Route::get('/category/delete/{id}','Delete')->name('admin.delete.category');
+    });
+    
+    Route::controller(BrandController::class)->group(function(){
+
+        Route::get('/all/brands','Index')->name('admin.all.brands');
+
+        Route::get('/brand/create','Create')->name('admin.create.brand');
+        Route::post('/brand/create','Save')->name('admin.save.brand');
+
+        Route::get('/brand/edit/{id}','Edit')->name('admin.update.brand');
+        Route::post('/brand/update/{id}','Update')->name('admin.edit.brand');
+
+        Route::get('/brand/delete/{id}','Delete')->name('admin.delete.brand');
     });
 
 });

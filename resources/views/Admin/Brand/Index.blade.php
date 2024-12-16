@@ -8,9 +8,9 @@
 
 <div class="card">
     <h5 class="card-header">
-        All Categories
-        <a href="{{url('/admin/category/create')}}" class="btn rounded-pill btn-primary float-end">
-            <i class="bx bx-list-plus"></i> Add Category</a>
+        All Brands
+        <a href="{{url('/admin/brand/create')}}" class="btn rounded-pill btn-primary float-end">
+            <i class="bx bx-list-plus"></i> Add Brand</a>
 
 
 
@@ -22,26 +22,28 @@
             <th>ID</th>
             <th>Name</th>
             <th>Slug</th>
-            <th>Image</th>
+            <th>Category Name</th>
+            <th>Logo</th>
             <th>Description</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
-            @foreach ($categories as $category)
+            @foreach ($brands as $brand)
                 
             <tr>
-                <th>{{$category->id}}</th>
-                <th>{{$category->name}}</th>
-                <th>{{$category->slug}}</th>
+                <th>{{$brand->id}}</th>
+                <th>{{$brand->name}}</th>
+                <th>{{$brand->slug}}</th>
+                <th>{{$brand->category->name}}</th>
                 <th>
-                    <img src="{{asset($category->image)}}" alt="Category Image" height="80px">
+                    <img src="{{asset($brand->logo)}}" alt="Brand Image" height="80px">
                 </th>
-                <th>{{$category->description}}</th>
+                <th>{{$brand->description}}</th>
                 <th>
-                    <a href="{{url('admin/category/edit/'.$category->id)}}" class="btn btn-sm btn-primary">Update</a>
+                    <a href="{{url('admin/brand/edit/'.$brand->id)}}" class="btn btn-sm btn-primary">Update</a>
                     
-                    <a href="{{url('admin/category/delete/'.$category->id)}}" class="btn btn-sm btn-danger">Delete</a>
+                    <a href="{{url('admin/brand/delete/'.$brand->id)}}" class="btn btn-sm btn-danger">Delete</a>
                     
                 </th>
                 

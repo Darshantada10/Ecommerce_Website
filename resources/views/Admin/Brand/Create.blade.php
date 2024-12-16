@@ -6,13 +6,30 @@
 <div class="col-xxl">
     <div class="card mb-4">
       <div class="card-header d-flex align-items-center justify-content-between">
-        <h5 class="mb-0">Add Category</h5>
-        <a href="{{url('/admin/all/categories')}}" class="btn btn-primary float-end">Back</a>
+        <h5 class="mb-0">Add Brand</h5>
+        <a href="{{url('/admin/all/brands')}}" class="btn btn-primary float-end">Back</a>
       </div>
       <div class="card-body">
-        <form action="{{url('/admin/category/create')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{url('/admin/brand/create')}}" method="POST" enctype="multipart/form-data">
             @csrf
             
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="category_id">Category</label>
+                <div class="col-sm-10">
+                    <select class="form-select" id="category_id" name="category_id" required>
+                        <option value="">Select a Category</option>
+                        @foreach ($categories as $category)
+                            <option value="{{$category->id}}">{{$category->name}}</option>
+                        @endforeach
+                    </select>
+                    @error('category_id')
+                        <small class="text-danger">{{$message}}</small>
+                    @enderror
+                </div>
+            </div>
+
+
+
           <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="name">Name</label>
             <div class="col-sm-10">
@@ -22,16 +39,6 @@
               @enderror
             </div>
           </div>
-         
-          {{-- <div class="row mb-3">
-            <label class="col-sm-2 col-form-label" for="slug">Slug</label>
-            <div class="col-sm-10">
-              <input type="text" class="form-control" id="slug" name="slug" required/>
-              @error('slug')
-                  <small class="text-danger">{{$message}}</small>
-              @enderror
-            </div>
-          </div> --}}
           
           <div class="row mb-3">
             <label class="col-sm-2 col-form-label" for="descriptiono">Description</label>
@@ -44,10 +51,10 @@
           </div>
 
           <div class="row mb-3">
-            <label class="col-sm-2 col-form-label" for="image">Image</label>
+            <label class="col-sm-2 col-form-label" for="logo">Logo</label>
             <div class="col-sm-10">
-              <input type="file" class="form-control" id="image" name="image" accept="image/*"/>
-              @error('image')
+              <input type="file" class="form-control" id="logo" name="logo" accept="image/*"/>
+              @error('logo')
                   <small class="text-danger">{{$message}}</small>
               @enderror
             </div>
