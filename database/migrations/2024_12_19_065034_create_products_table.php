@@ -13,7 +13,29 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            /*
+            $table->unsignedBigInteger('category_id');
+            $table->unsignedBigInteger('brand_id');
+            
+            $table->json('attributes');
+
+            $table->foreign('category_id')->references('id')->on('categories');
+            $table->foreign('brand_id')->references('id')->on('brands');
+
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('products');
+    }
+};
+
+/*
+
                 category_id(foreign)
                 brand_id(foreign)
                 
@@ -111,11 +133,13 @@ return new class extends Migration
             // $table->unsignedBigInteger('category_id');
             // $table->unsignedBigInteger('brand_id');
 
+            // 1st schema
             // $table->string('size')->nullable(); // eg:s,m,l
             // $table->string('color')->nullable(); // eg:red,pink,black
             // $table->string('model')->nullable(); //eg: 8+128,12+128,8+256
             // $table->string('quantity')->nullable();
 
+            // 2nd schema
             // $table->string('attribute_1_type')->nullable(); // eg:size / color / model
             // $table->string('attribute_1_value')->nullable(); // eg:s,m,l / red,black / 8+128
             // $table->string('attribute_1_quantity')->nullable(); // eg:1000
@@ -132,6 +156,7 @@ return new class extends Migration
             // limited options
             // unused fields
 
+            // 3rd schema
             // $table->json('attributes');
 
             //pros
@@ -143,15 +168,4 @@ return new class extends Migration
             // one column will weigh more than others
             // custom logic
 
-            $table->timestamps();
-        });
-    }
 
-    /**
-     * Reverse the migrations.
-     */
-    public function down(): void
-    {
-        Schema::dropIfExists('products');
-    }
-};

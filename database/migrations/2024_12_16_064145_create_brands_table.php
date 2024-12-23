@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('brands', function (Blueprint $table) {
             $table->id();
-            $table->string('name')->unique();
-            $table->string('slug')->unique();
+            $table->string('name');
+            $table->string('slug');
             $table->string('logo')->nullable();
             $table->string('description')->nullable();     
 
             $table->unsignedBigInteger('category_id');
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade'); 
-                  
+            $table->unique(['name','category_id']);
+            $table->unique(['slug','category_id']);
             $table->timestamps();
         });
     }
