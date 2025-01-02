@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+  <!-- <input id="username"></input> -->
+
+    <!-- <script>
+        console.log(document.getElementById("username").value);
+    </script> -->
+
+    <!-- <button onclick="randomfunction()">Click Me</button>
+
+
+        <script>
+            function randomfunction()
+            {
+                console.log("called function");
+                console.log("");
+                
+            }
+        </script> -->
+
+
+        <!-- <input type="text" onblur="randomfunction()">
+
+        <script>
+            function randomfunction()
+            {
+                console.log("called function on blur");
+            }
+        </script> -->
+
+
+        <!-- <p style="color:red">Already Taken</p> -->
+
+        <!-- <input type="text" id="username" onblur="CheckUsername()">
+        <span id="usernamemessage"></span> -->
+        <!-- <input id="email" onkeyup="CheckEmail()"> -->
+        <!-- <input type="text" id="email" onkeypress="CheckEmail()"> -->
+        <!-- <input type="text" id="email" onkeydown="CheckEmail()"> -->
+        <!-- <span id="emailmessage"></span> -->
+        <span id="formmessage"></span>
+        <button onclick="Check()">Submit</button>
+
+        <script>
+            function CheckUsername()
+            {
+                var username = document.getElementById("username").value;
+                
+                var message = document.getElementById("usernamemessage")
+                if(username == "admin")
+                {
+                    // console.log("this username already exists");
+                    // alert("This username already exists")
+                
+                    message.innerHTML = '<p style="color:red">Already Taken</p>'
+                }
+                else
+                {
+                    // console.log("you can use this username");
+                    message.innerHTML = '<p style="color:gray">You can use this username</p>'
+                    // message.innerHTML = null
+
+                }
+
+                // console.log(username);
+                         
+            }
+
+            function CheckEmail()
+            {
+                var email = document.getElementById("email").value
+                // console.log(email)
+                var message = document.getElementById("emailmessage")
+
+                if(email == "admin@mail.com")
+            {
+                message.innerHTML = '<p style="color:red">Email Already Taken</p>'
+
+            }
+            else
+                {
+                    // console.log("you can use this email");
+                    message.innerHTML = '<p style="color:gray">You can use this email</p>'
+                    // message.innerHTML = null
+
+                }
+            }
+
+            function Check()
+            {
+                var message = document.getElementById("formmessage")
+                message.innerHTML = '<p style="color:red">Please fill all the fields</p>'
+
+                // alert("please fill all the fields");
+            }
+
+        </script>
+
+
+
+
+
+<!-- // console.log("inside function");
+// var let const
+var name = "darshan" // declaring variable
+name = "thunder" // re-assigning new value to variable
+var name = "admin" // re declaring variable
+// console.log(name);
+
+let email = "darshan@mail.com" // declaring variable
+email = "thunder@mail.com" // re-assigning value to variable ( when using let type you can re assign as many times as you like)
+// let email = "admin@mail.com" // re declaring variable (when useing let type you cannot re declare vairable)
+// console.log(email);
+
+const dob = "29/05/2000" // declaring variable
+// dob = "20/10/2001" // re-assigning new value to variable (in const you cannot re assign values)
+// const dob = "01/01/2000"// re declaring variable (when useing const type you cannot re declare vairable)
+// console.log(dob); -->
+
+
+
+
+
+</body>
+</html>

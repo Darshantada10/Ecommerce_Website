@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
 use App\Http\Controllers\Admin\HeroSectionController;
+use App\Http\Controllers\Admin\JSTaskController;
 use App\Http\Controllers\Admin\ProductController;
 
 Route::get('/',[HomeController::class,'Index'])->name('index');
@@ -84,5 +85,25 @@ Route::prefix('/admin')->middleware('admin')->group(function(){
 
         Route::get('/product/delete/{id}','Delete')->name('admin.delete.product');
     });
+
+    Route::controller(ProductController::class)->group(function(){
+
+        Route::get('/all/products','Index')->name('admin.all.products');
+
+        Route::get('/product/create','Create')->name('admin.create.product');
+        Route::post('/product/create','Save')->name('admin.save.product');
+
+        Route::get('/product/edit/{id}','Edit')->name('admin.update.product');
+        Route::post('/product/update/{id}','Update')->name('admin.edit.product');
+
+        Route::get('/product/delete/{id}','Delete')->name('admin.delete.product');
+    });
+
+    Route::controller(JSTaskController::class)->group(function(){
+        
+        Route::get('/all/tasks','Index')->name('admin.all.tasks');
+        
+    });
+
 
 });
