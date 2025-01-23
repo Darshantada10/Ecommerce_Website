@@ -10,7 +10,7 @@
 @if (session('error'))
 <p style="color: red;">{{session('error')}}</p>
 @endif
-
+{{-- 
 <div class="section imgBanners">
     <div class="imgBnrOuter">
         <div class="container-fluid">
@@ -78,7 +78,7 @@
     </div>
 </div>  
   
-@endif
+@endif --}}
 
 
 

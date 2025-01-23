@@ -2,19 +2,23 @@
 
 @section('Content')
     
+@include('Admin.Task.AddTaskModal')
+
 @if (session('success'))
 <p class="text-primary">{{session('success')}}</p>
 @endif
 
 <div class="card">
+
     <h5 class="card-header">
+
         All Tasks
-        <a href="{{url('/admin/task/create')}}" class="btn rounded-pill btn-primary float-end">
-            <i class="bx bx-list-plus"></i> Add Task</a>
-
-
+        <a href="#" class="btn rounded-pill btn-primary float-end" data-bs-toggle="modal" data-bs-target="#AddTaskModal">
+            <i class="bx bx-list-plus"></i> Add Task
+        </a>
 
     </h5>
+
     <div class="table-responsive text-nowrap">
       <table class="table">
         <thead>
@@ -27,12 +31,7 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody>
-            @foreach ($tasks as $task)
-                
-           
-            
-            @endforeach
+        <tbody id="alldata">
             
         </tbody>
       </table>
@@ -41,5 +40,25 @@
     </div>
 
 
+<script>
+
+
+  fetch(`/admin/api/all/tasks`).then(response => response.json()).then(data => {
+    console.log(data);
+      
+
+   });
+
+
+</script>
+
+
+
+
+
+
+
 
 @endsection
+
+

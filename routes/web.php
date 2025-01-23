@@ -102,7 +102,19 @@ Route::prefix('/admin')->middleware('admin')->group(function(){
     Route::controller(JSTaskController::class)->group(function(){
         
         Route::get('/all/tasks','Index')->name('admin.all.tasks');
-        
+        Route::get('/api/all/tasks','APIAllData')->name('admin.all.tasks.api');
+        // Route::get('/api/task/save','Store')->name('admin.save.task');   
+        Route::post('/api/task/save','Store')->name('admin.save.task');
+        // Route::get('/api/task/update','Update')->name('admin.update.task');
+        Route::post('/api/task/update','Update')->name('admin.update.task');
+        Route::get('/api/task/delete','Delete')->name('admin.delete.task');
+
+        // there 2 possibilities
+        // 1) you can create seprate pages for each save or update method and then you will have to create route and url for that aswell (you should avoid) but if the content is so long or form is lengthy then you can create seprate pages for that but that depends on you
+        // 2) most common pratice is to do everything on a single page and open pop up forms to fill up data
+        // SPA (Single Page Application)
+
+
     });
 
 
