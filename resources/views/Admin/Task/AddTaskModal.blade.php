@@ -7,7 +7,7 @@
         </div>
         <div class="modal-body">
           
-            <form id="AddTaskForm" onsubmit="tryyourself">
+            <form id="AddTaskForm">
                 
                 <div class="mb-3">
                     <label for="Name" class="form-label">Name</label>
@@ -65,11 +65,20 @@
             alert("Task Added Successfully!");
             const modal = bootstrap.Modal.getInstance(document.getElementById('AddTaskModal'));
             modal.hide();
-        }
-        else
-        {
+
+            // document.getElementById('Name').value = '';
+            // document.getElementById('Age').value = '';
+            // document.getElementById('City').value = '';
+            // document.getElementById('Salary').value = '';
+
+            document.getElementById('AddTaskForm').reset();
+            DisplayData();
+
+          }
+          else
+          {
             alert("Failed To Add Task!");
-        }
+          }
             
         }).catch(error=>console.error('Error Adding Task: ',error));
     });

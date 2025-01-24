@@ -31,8 +31,8 @@
             <th>Action</th>
           </tr>
         </thead>
-        <tbody id="alldata">
-            
+        <tbody id="TaskData">
+            {{-- <td>helo</td> --}}
         </tbody>
       </table>
 
@@ -42,14 +42,42 @@
 
 <script>
 
+function DisplayData()
+{
 
   fetch(`/admin/api/all/tasks`).then(response => response.json()).then(data => {
-    console.log(data);
-      
+    // console.log(data);
+    var Tasks = JSON.parse(data);
+    // console.log(Tasks);
+
+    var AllData = document.getElementById('TaskData')
+    
+    // AllData.innerHTML = "";
+    var TableData = "";
+    Tasks.forEach(task => {
+      TableData += 
+      `
+        <tr>
+          <td>${task.id}</td>
+          <td>${task.name}</td>
+          <td>${task.age}</td>
+          <td>${task.city}</td>
+          <td>${task.salary}</td>
+          <td>
+              <button class="btn btn-primary btn-sm edit-btn" data-id="${task.id}">Edit</button>
+              <button class="btn btn-danger btn-sm edit-btn" data-id="${task.id}">Delete</button>
+          </td>
+        </tr>
+      `;
+      AllData.innerHTML = TableData;
+
+    });
 
    });
+  
+}
 
-
+DisplayData();
 </script>
 
 
