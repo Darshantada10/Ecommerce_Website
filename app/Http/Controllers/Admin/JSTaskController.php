@@ -43,4 +43,20 @@ class JSTaskController extends Controller
 
         return response()->json(['Success'=>true,'Message'=>"Task Added Successfully"]);
     }
+
+    public function UpdateData($id)
+    {
+        // dd($id,"received form controler");
+        $data = JSTask::findOrFail($id);
+        // dd($data);
+        return response()->json($data);
+    }
+
+    public function Delete(Request $request)
+    {
+        // dd($request);
+        JSTask::destroy($request->id);
+
+        return response()->json(['Success'=>true,'Message'=>"Task Deleted Successfully"]);
+    }
 }
