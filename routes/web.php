@@ -105,7 +105,7 @@ Route::prefix('/admin')->middleware('admin')->group(function(){
         Route::get('/api/all/tasks','APIAllData')->name('admin.all.tasks.api');
         // Route::get('/api/task/save','Store')->name('admin.save.task');   
         Route::post('/api/task/save','Store')->name('admin.save.task');
-        // Route::get('/api/task/update','Update')->name('admin.update.task');
+        Route::get('/api/update/task/{id}','UpdateData')->name('admin.update.task.id');
         Route::post('/api/task/update','Update')->name('admin.update.task');
         Route::get('/api/task/delete','Delete')->name('admin.delete.task');
 
