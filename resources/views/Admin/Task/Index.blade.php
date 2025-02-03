@@ -3,6 +3,7 @@
 @section('Content')
     
 @include('Admin.Task.AddTaskModal')
+@include('Admin.Task.EditTaskModal')
 
 @if (session('success'))
 <p class="text-primary">{{session('success')}}</p>
@@ -64,8 +65,8 @@ function DisplayData()
           <td>${task.city}</td>
           <td>${task.salary}</td>
           <td>
-              <button class="btn btn-primary btn-sm edit-btn" data-id="${task.id}">Edit</button>
-              <button class="btn btn-danger btn-sm edit-btn" data-id="${task.id}">Delete</button>
+              <button class="btn btn-primary btn-sm edit-btn" data-id="${task.id}" data-bs-toggle="modal" data-bs-target="#EditTaskModal" onclick="EditData(${task.id})">Edit</button>
+              <button class="btn btn-danger btn-sm delete-btn" data-id="${task.id}">Delete</button>
           </td>
         </tr>
       `;
@@ -78,6 +79,48 @@ function DisplayData()
 }
 
 DisplayData();
+
+// function EditData(id)
+// {
+//   // console.log("called function",id);
+//   fetch(`/admin/api/update/task/${id}`).then(response => response.json()).then(data => {
+//     // var Tasks = JSON.parse(data);
+//     // console.log(Tasks);
+//     console.log(data);
+//     // document.getElementById('Salary').value = "Natha Bhai"
+//     document.getElementById('Name').innerHTML = "Natha Bhai"
+    
+//     // var AllData = document.getElementById('TaskData')
+//   });
+
+
+// }
+
+document.addEventListener('click',function(e)
+{
+  console.log(e.target.classList);
+  // console.log(e.target.dataset.id);
+  
+  if(e.target.classList.contains('delete-btn'))
+  {
+    const DeleteId = e.target.dataset.id; 
+
+    if(confirm("Are You Sure You Want To Delete This?"))
+    {
+      fetch(`/admin/api/task/delete?id=${DeleteId}`,{method:'GET'}).then(response => response.json()).then(data =>
+        {
+          // console.log(data);
+          // location.reload(); it will reload the page
+          DisplayData();
+
+        }
+      )
+    }
+  }
+
+})
+
+
 </script>
 
 
