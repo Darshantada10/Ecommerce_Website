@@ -47,9 +47,9 @@ function DisplayData()
 {
 
   fetch(`/admin/api/all/tasks`).then(response => response.json()).then(data => {
-    // console.log(data);
+    console.log(data);
     var Tasks = JSON.parse(data);
-    // console.log(Tasks);
+    console.log(Tasks);
 
     var AllData = document.getElementById('TaskData')
     
@@ -80,25 +80,34 @@ function DisplayData()
 
 DisplayData();
 
-// function EditData(id)
-// {
-//   // console.log("called function",id);
-//   fetch(`/admin/api/update/task/${id}`).then(response => response.json()).then(data => {
-//     // var Tasks = JSON.parse(data);
-//     // console.log(Tasks);
-//     console.log(data);
-//     // document.getElementById('Salary').value = "Natha Bhai"
-//     document.getElementById('Name').innerHTML = "Natha Bhai"
+function EditData(id)
+{
+  fetch(`/admin/api/update/task/${id}`).then(response => response.json()).then(task => {
+    // console.log(task);
+    document.getElementById('Edit_Id').value = task.id
+    document.getElementById('Edit_Name').value = task.name
+    // document.getElementById('Name').value = task.name
+    document.getElementById('Edit_Age').value = task.age
+    document.getElementById('Edit_City').value = task.city
+    document.getElementById('Edit_Salary').value = task.salary
+  })
+  // console.log("called function",id);
+  // fetch(`/admin/api/update/task/${id}`).then(response => response.json()).then(data => {
+  //   // var Tasks = JSON.parse(data);
+  //   // console.log(Tasks);
+  //   console.log(data);
+  //   // document.getElementById('Salary').value = "Natha Bhai"
+  //   document.getElementById('Name').innerHTML = "Natha Bhai"
     
-//     // var AllData = document.getElementById('TaskData')
-//   });
+  //   // var AllData = document.getElementById('TaskData')
+  // });
 
 
-// }
+}
 
 document.addEventListener('click',function(e)
 {
-  console.log(e.target.classList);
+  // console.log(e.target.classList);
   // console.log(e.target.dataset.id);
   
   if(e.target.classList.contains('delete-btn'))
@@ -109,8 +118,8 @@ document.addEventListener('click',function(e)
     {
       fetch(`/admin/api/task/delete?id=${DeleteId}`,{method:'GET'}).then(response => response.json()).then(data =>
         {
-          // console.log(data);
-          // location.reload(); it will reload the page
+          console.log(data);
+          // location.reload(); //it will reload the page
           DisplayData();
 
         }

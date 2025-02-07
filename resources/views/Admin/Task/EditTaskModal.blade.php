@@ -12,22 +12,28 @@
                 <div class="mb-3">
                     <label for="Name" class="form-label">Name</label>
                     {{-- <input type="text" class="form-control" id="Name" required value="{{$data->name}}"> --}}
-                    <input type="text" class="form-control" id="Name" required>
+                    <input type="text" class="form-control" id="Edit_Name" required>
+                    {{-- <input type="text" class="form-control" id="Name" required> --}}
                 </div>
                 
                 <div class="mb-3">
+                    {{-- <label for="Id" class="form-label">ID</label> --}}
+                    <input class="form-control" id="Edit_Id" type="hidden" required>
+                </div>
+
+                <div class="mb-3">
                     <label for="Age" class="form-label">Age</label>
-                    <input type="number" class="form-control" id="Age" required>
+                    <input type="number" class="form-control" id="Edit_Age" required>
                 </div>
                 
                 <div class="mb-3">
                     <label for="City" class="form-label">City</label>
-                    <input type="text" class="form-control" id="City" required>
+                    <input type="text" class="form-control" id="Edit_City" required>
                 </div>
                 
                 <div class="mb-3">
                     <label for="Salary" class="form-label">Salary</label>
-                    <input type="number" class="form-control" id="Salary" required>
+                    <input type="number" class="form-control" id="Edit_Salary" required>
                 </div>
 
                 <button type="submit" class="btn btn-primary">Update Task</button>
@@ -40,6 +46,47 @@
       </div>
     </div>
   </div>
+
+  <script>
+    document.getElementById('EditTaskForm').addEventListener('submit',function(e){
+      e.preventDefault();
+
+      var id = document.getElementById('Edit_Id').value;
+      var name = document.getElementById('Edit_Name').value;
+      var age = document.getElementById('Edit_Age').value;
+      var city = document.getElementById('Edit_City').value;
+      var salary = document.getElementById('Edit_Salary').value;
+
+      fetch(`/admin/api/task/update/${id}`,{
+        method: 'POST',
+        headers: {'Content-Type':'Application/json','X-CSRF-TOKEN':'{{csrf_token()}}'},
+        body: JSON.stringify({
+          id: id,
+          Name:name,
+          Age:age,
+          City:city,
+          Salary:salary,
+        })
+      }).then(response => response.json()).then(data => {
+        // console.log(data);
+        if(data.Success == true)
+      {
+        alert('Task Updated Successfully');
+        document.getElementById('EditTaskForm').reset();
+        DisplayData();
+        var modal = bootstrap.Modal.getInstance(document.getElementById('EditTaskModal'));
+        modal.hide();
+      }
+      else
+      {
+        alert('Error Updating Task');
+      }
+        
+      });
+
+
+    });
+  </script>
 
   {{-- <script>
 
