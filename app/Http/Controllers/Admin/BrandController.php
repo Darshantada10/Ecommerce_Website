@@ -13,7 +13,10 @@ class BrandController extends Controller
 {
     public function Index()
     {
-        $brands = Brand::all();
+        // $brands = Brand::all();
+        // $brands = Brand::withTrashed()->get() ?? Brand::all();
+        $brands = Brand::withTrashed()->get();
+        // dd($brands);
         // dd($brands[0]->category->name);
         return view('Admin.Brand.Index',compact('brands'));
     }
@@ -40,6 +43,18 @@ class BrandController extends Controller
         $data->delete();
         return redirect('/admin/all/brands')->with('success','Brand Deleted Successfully');
     }
+
+    // public function Restore(Request $request,$id )
+    // {
+    //     $brand = Brand::onlyTrashed()->findOrFail($id);
+    //     $brand->restore();
+    // }
+
+    // public function PermanentDelete(Request $request,$id)
+    // {
+    //     $brand = Brand::onlyTrashed()->findOrFail($id);
+    //     $brand->forceDelete();
+    // }
     public function Save(Request $request)
     {
         if($request->hasFile('logo'))
