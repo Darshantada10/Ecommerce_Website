@@ -6,6 +6,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AdminController;
 use App\Http\Controllers\Admin\BrandController;
+use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\HeroSectionController;
 use App\Http\Controllers\Admin\JSTaskController;
 use App\Http\Controllers\Admin\ProductController;
@@ -102,11 +103,14 @@ Route::prefix('/admin')->middleware('admin')->group(function(){
     Route::controller(JSTaskController::class)->group(function(){
         
         Route::get('/all/tasks','Index')->name('admin.all.tasks');
+        
         Route::get('/api/all/tasks','APIAllData')->name('admin.all.tasks.api');
         // Route::get('/api/task/save','Store')->name('admin.save.task');   
         Route::post('/api/task/save','Store')->name('admin.save.task');
+
         Route::get('/api/update/task/{id}','UpdateData')->name('admin.update.task.id');
         Route::post('/api/task/update/{id}','Update')->name('admin.update.task');
+
         Route::get('/api/task/delete','Delete')->name('admin.delete.task');
 
         // there 2 possibilities
@@ -117,5 +121,14 @@ Route::prefix('/admin')->middleware('admin')->group(function(){
 
     });
 
+    
+
 
 });
+
+// Route::apiResource('employees',EmployeeController::class);
+//     // get -> index -> get all employees
+//     // post -> store -> save employees data
+//     // get -> show -> single employees data
+//     // put/patch -> update -> update single employees data
+//     // delete/get/post -> destroy -> destroy single employees data
