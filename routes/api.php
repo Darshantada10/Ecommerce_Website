@@ -10,11 +10,17 @@ use App\Http\Controllers\Admin\EmployeeController;
 // })->middleware('auth:sanctum');
 
 Route::apiResource('employees',EmployeeController::class);
+
     // get -> index -> get all employees
+    // /api/employees 
     // post -> store -> save employees data
+    // /api/employees 
     // get -> show -> single employees data
+    // /api/employees/{id} 
     // put/patch -> update -> update single employees data
+    // /api/employees/{id} 
     // delete/get/post -> destroy -> destroy single employees data
+    // /api/employees/{id} 
 
     // Route::controller(ProductController::class)->group(function(){
 

@@ -14,15 +14,32 @@ class EmployeeController extends Controller
     public function index()
     {
         $employee = Employee::all();
+        // http://localhost:8000/api/employees
+        // i will provide this same url to Android app developer , ios app developer and software developer
         return response()->json($employee);
+    }
+
+    public function WebsiteIndexPage()
+    {
+        // $employee = Employee::all();
+        // ,compact('employee')
+        return view('Admin.Employee.index');
     }
 
     /**
      * Show the form for creating a new resource.
      */
-    public function create()
+    public function create(Request $request)
     {
-        //
+        // laravel website mate
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'email' => 'required|email|max:255|unique:users,email,',
+        //     'profile' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
+        //     'address' => 'nullable|string',
+        //     'insurance' => 'nullable|string',
+        //     'marital_status' => 'nunllable',
+        // ]);
     }
 
     /**
@@ -31,6 +48,17 @@ class EmployeeController extends Controller
     public function store(Request $request)
     {
         // dd($request);
+                // mobile application mate
+
+        // $request->validate([
+        //     'name' => 'required|string|max:255',
+        //     'email' => 'required|email|max:255|unique:users,email,',
+        //     'profile' => 'nullable|image|mimes:jpeg,png,jpg,gif,webp',
+        //     'address' => 'nullable|string',
+        //     'insurance' => 'nullable|string',
+        //     'marital_status' => 'nunllable',
+        // ]);
+
         $employee = Employee::create($request->all());
         return response()->json( $employee);
 

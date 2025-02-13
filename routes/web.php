@@ -121,6 +121,11 @@ Route::prefix('/admin')->middleware('admin')->group(function(){
 
     });
 
+    Route::controller(EmployeeController::class)->group(function(){
+
+        Route::get('/all/employees','WebsiteIndexPage')->name('admin.all.employee');
+
+    });
     
 
 
