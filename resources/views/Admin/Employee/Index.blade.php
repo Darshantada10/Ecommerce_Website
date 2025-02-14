@@ -6,11 +6,15 @@
 <p class="text-primary">{{session('success')}}</p>
 @endif
 
+@include('Admin.Employee.Create')
+
 <div class="card">
     <h5 class="card-header">
         All Employees
-        <a href="{{url('/admin/employee/create')}}" class="btn rounded-pill btn-primary float-end">
-            <i class="bx bx-list-plus"></i> Add Employee</a>
+        {{-- <a href="#" class="btn rounded-pill btn-primary float-end" onclick="ShowCreateModal()">
+            <i class="bx bx-list-plus"></i> Add Employee</a> --}}
+        <button class="btn rounded-pill btn-primary float-end" onclick="ShowCreateModal()">
+            <i class="bx bx-list-plus"></i> Add Employee</button>
 
 
 
@@ -61,6 +65,14 @@
     </div>
 
 <script>
+  function ShowCreateModal()
+  {
+    // console.log("inside function");
+    // document.getElementById('CreateEmployeeForm')
+    new bootstrap.Modal(document.getElementById('CreateEmployeeModal')).show();
+    
+  }
+
     function DisplayData()
 {
 

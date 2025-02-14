@@ -14,7 +14,8 @@ class EmployeeController extends Controller
     public function index()
     {
         $employee = Employee::all();
-        // http://localhost:8000/api/employees
+        // http://localhost:8000/api/employees -> local url example
+        // https://www.perenexa.com/api/employees -> live url example
         // i will provide this same url to Android app developer , ios app developer and software developer
         return response()->json($employee);
     }
@@ -58,7 +59,7 @@ class EmployeeController extends Controller
         //     'insurance' => 'nullable|string',
         //     'marital_status' => 'nunllable',
         // ]);
-
+        // dd($request);
         $employee = Employee::create($request->all());
         return response()->json( $employee);
 
