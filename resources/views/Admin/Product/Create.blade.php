@@ -16,7 +16,8 @@
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="category_id">Category</label>
                 <div class="col-sm-10">
-                    <select class="form-select" id="category_id" name="category_id" onchange="categorybrand()" required>
+            
+                    <select class="form-select" id="category_id" name="category_id" required>
                         <option value="">Select a Category</option>
                         @foreach ($categories as $category)
                             <option value="{{$category->id}}">{{$category->name}}</option>
@@ -27,6 +28,62 @@
                     @enderror
                 </div>
             </div>
+           
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="brand_id">Brand</label>
+                <div class="col-sm-10">
+            
+                    <select class="form-select" id="brand_id" name="brand_id" required>
+                        <option value="">Select a Brand</option>
+                        @foreach ($brands as $brand)
+                            <option value="{{$brand->id}}">{{$brand->name}}</option>
+                        @endforeach
+                    </select>
+                    @error('brand_id')
+                        <small class="text-danger">{{$message}}</small>
+                    @enderror
+                </div>
+            </div>
+            
+            {{-- <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="product_name">Product Name</label>
+                <div class="col-sm-10">
+            <input type="text" class="form-control" id="product_name" name="product_name">
+                    @error('product_name')
+                        <small class="text-danger">{{$message}}</small>
+                    @enderror
+                </div>
+            </div>
+           
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="product_price">Product Price</label>
+                <div class="col-sm-10">
+            <input type="text" class="form-control" id="product_price" name="product_price">
+                    @error('product_price')
+                        <small class="text-danger">{{$message}}</small>
+                    @enderror
+                </div>
+            </div>
+           
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="product_quantity">Product Quantity</label>
+                <div class="col-sm-10">
+            <input type="text" class="form-control" id="product_quantity" name="product_quantity">
+                    @error('product_quantity')
+                        <small class="text-danger">{{$message}}</small>
+                    @enderror
+                </div>
+            </div> --}}
+
+            {{-- <div class="row mb-3">
+                <label class="col-sm-2 col-form-label" for="product_quantity">Product Quantity</label>
+                <div class="col-sm-10">
+            <input type="text" class="form-control" id="product_quantity" name="product_quantity">
+                    @error('product_quantity')
+                        <small class="text-danger">{{$message}}</small>
+                    @enderror
+                </div>
+            </div> --}}
             
             {{-- <div class="row mb-3">
                 <label class="col-sm-2 col-form-label" for="brand_id">Brand</label>

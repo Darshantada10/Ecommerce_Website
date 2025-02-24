@@ -73,8 +73,8 @@
     
   }
 
-    function DisplayData()
-{
+  function DisplayData()
+  {
 
   fetch(`/api/employees`).then(response => response.json()).then(Employees => {
     console.log(Employees);

@@ -29,10 +29,16 @@ class ProductController extends Controller
 
         $categories = Category::all();
         $brands = Brand::all();
+        // dd($brands);
         // $brands = Brand::where('category_id','2')->get();
         // $brands = Brand::where('category_id','=','1')->get();
         // $brands = Brand::where('price','>=','100')->get();
         // dd($brands);
         return view('Admin.Product.Create',compact('categories','brands'));
+    }
+
+    public function Save(Request $request)
+    {
+        dd($request);
     }
 }
