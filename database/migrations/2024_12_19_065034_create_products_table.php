@@ -13,14 +13,26 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('category_id');
-            $table->unsignedBigInteger('brand_id');
-            
-            $table->json('attributes');
+            $table->unsignedBigInteger('category_id')->index();
+            $table->unsignedBigInteger('brand_id')->index();
 
+            $table->string('name');
+            $table->string('slug')->unique();
+            $table->text('description')->nullable();
+            $table->decimal('original_price',10,4);
+            $table->decimal('sale_price',10,4)->nullable();
+            $table->string('image')->nullable();
+            $table->json('gallery')->nullable();
+            $table->boolean('status')->default(true)->comment('true is visible and false is not visible');
+            $table->string('sku')->unique()->nullable();
+            
+            $table->boolean('has_variants')->default(false)->comment('false is no variant');
+            $table->json('attributes')->nullable();
+            
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('brand_id')->references('id')->on('brands');
-
+            
+            $table->softDeletes();
             $table->timestamps();
         });
     }
