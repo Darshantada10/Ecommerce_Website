@@ -185,19 +185,131 @@
 
 
   <script>
+
     document.addEventListener('DOMContentLoaded',function(){
+
         const hasVariantsCheckbox = document.getElementById('has_variants');
         const AttributeOptionsSection = document.getElementById('AttributeOptionsSection');
 
         hasVariantsCheckbox.addEventListener('change',function(){
             AttributeOptionsSection.style.display = this.checked ? 'block' : 'none';
 
-            // if(this.checked && document.querySelectorAll('.attribute'))
+            if(this.checked && document.querySelectorAll('.attribute-card').length === 0)
+            {
+                addAttributeCard('Color');
+                // addAttributeCard('Size');
+            }
+        });
+        
+        document.getElementById('addAttributeType').addEventListener('click',function(){
+            addAttributeCard();
+        });
+
+        function addAttributeCard(defaultName = "")
+        {
+           const attributeContainer = document.getElementById('attributeContainer');
+           const attributeId = 'attr_' + Date.now();
+           const attributeName = defaultName || 'Enter Your Attribute';
+
+            const card = document.createElement('div');
+            card.classList.add('row','mb-3','attribute-card');
+            card.dataset.attributeId = attributeId;
+
+            card.innerHTML = 
+            `
+                <div class="col-md-4 mb-3">
+
+                    <div class="card">
+
+                        <div class="card-header d-flex justify-content-between align-items-center">
+
+                            <input type="text" class="form-control attribute-name" value="${attributeName}" placeholder="Attribute Name" name="attribute_names[]" required>
+
+                            <button type="button" class="btn btn-sm btn-outline-danger ms-2 remove-attribute-card">
+                                <i class="bx bx-trash"></i>
+                            </button>
+
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="attribute-values" data-attribute-id="${attributeId}">
+
+                            <div class="mb-2 d-flex attribute-value-row">
+                                
+                                <input type="text" class="form-control me-2 attribute-value" name="attribute_values[${attributeId}][]" placeholder="Enter Your value">
+
+                                <button type="button" class="btn btn-sm btn-outline-danger remove-option">
+                                    <i class="bx bx-trash"></i>
+                                </button>
+                            </div>
+
+                        </div>
+
+                        <button type="button" class="btn btn-sm btn-outline-primary mt-2 add-value-btn" data-attribute-id="${attributeId}">
+                            <i class="bx bx-plus"></i> Add value
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+            `;
+
+            attributeContainer.appendChild(card);
+            // card.classList.remove
+
+            setupCardEventListeners(card);
+        }
+
+        function setupCardEventListeners(card)
+        {
+            card.querySelector('.remove-attribute-card').addEventListener('click',function()
+            {
+                card.remove();
+            });
+
+            card.querySelector('.add-value-btn').addEventListener('click',function(){
+
+                const attributeId = this.dataset.attributeId;
+                const valuesContainer = card.querySelector(`.attribute-values[data-attribute-id="${attributeId}"]`);
+
+                const newValuesRows = document.createElement('div');
+                newValuesRows.classList.add('mb-2','d-flex','attribute-value-row');
+                newValuesRows.innerHTML = 
+                `
+                    <input type="text" class="form-control me-2 attribute-value" name="attribute_values[${attributeId}][]" placeholder="Enter Your Value">
+                    <button type="button" class="btn btn-sm btn-outline-danger remove-option">
+                        <i class="bx bx-trash"></i>
+                    </button>
+                `;
+
+                valuesContainer.appendChild(newValuesRows);
+
+                newValuesRows.querySelector('.remove-option').addEventListener('click',function(){
+                    newValuesRows.remove();
+                });
+            });
+
+            card.querySelectorAll('.remove-option').forEach(button => {
+                button.addEventListener('click',function(){
+                    this.closest('.attribute-value-row').remove();
+                });
+            });
+
+        }
+
+        document.getElementById('generateVariants').addEventListener('click',function(){
+            console.log("called Generate Variants");
+            
+        });
+
+        document.getElementById('previewVariants').addEventListener('click',function(){
+            console.log("called Preview Variants");
+            
+        });
 
 
-
-
-        })
     })
+
   </script>
 @endsection
