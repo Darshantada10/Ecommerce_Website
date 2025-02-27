@@ -14,7 +14,7 @@ class Product extends Model
         'category_id',
         'brand_id',
         'name',
-        'slug',
+        'slug', // this will be created inside controller
         'description',
         'original_price',
         'sale_price',
