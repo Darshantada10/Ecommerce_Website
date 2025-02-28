@@ -184,6 +184,87 @@
   </div>
 
 
+
+  <div class="modal fade" id="variantPreviewModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Variant Preview</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="close"></button>
+            </div>
+            <div class="modal-body">
+                <div id="previewContent"></div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+  </div>
+
+  <div class="row mt-3">
+    <div class="col-12">
+        <div class="table-responsive">
+            <table class="table table-bordered" id="variantsTable" style="display: none">
+                <thead>
+                    <tr>
+                        <th>Varaint</th>
+                        <th>SKU</th>
+                        <th>Original Price</th>
+                        <th>Selling Price</th>
+                        <th>Quantity</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+    
+                <tbody id="variantsTableBody">
+    
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+  </div>
+
+  <div class="row mt-3" id="bulkActionsSection" style="display: none">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <h6 class="card-title">Bulk Actions</h6>
+                <div class="row g-3">
+
+                    <div class="col-md-4">
+                        <label class="form-label">Set All Original Price</label>
+                        <div class="input-group">
+                            <input type="number" step="0.01" class="form-control" id="bulkOriginalPrice">
+                            <button class="btn btn-outline-primary" type="button" id="applyBulkOriginalPrice">Apply</button>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <label class="form-label">Set All Sale Prices</label>
+                        <div class="input-group">
+                            <input type="number" step="0.01" class="form-control" id="bulkSalePrice">
+                            <button class="btn btn-outline-primary" type="button" id="applyBulkSalePrice">Apply</button>
+                        </div>
+                    </div>
+                   
+                    <div class="col-md-4">
+                        <label class="form-label">Set All Quantities</label>
+                        <div class="input-group">
+                            <input type="number" min="0" class="form-control" id="bulkQuantity">
+                            <button class="btn btn-outline-primary" type="button" id="applyBulkQuantity">Apply</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+
+
+
   <script>
 
     document.addEventListener('DOMContentLoaded',function(){
@@ -299,14 +380,224 @@
         }
 
         document.getElementById('generateVariants').addEventListener('click',function(){
-            console.log("called Generate Variants");
+            // console.log("called Generate Variants");
+            GenerateAndDisplayVariants();
             
         });
 
         document.getElementById('previewVariants').addEventListener('click',function(){
-            console.log("called Preview Variants");
+            // console.log("called Preview Variants");
+           
+            const attributes = collectAttributeData();
+            // console.log(attributes);
+            
+            const combinations = GenerateCombinations(attributes);
+
+            let previewHTML = '<h6>'+ combinations.length + ' Variants will be generated:</h6>';
+            previewHTML += '<ul class="list-group">';
+
+                combinations.forEach(combo => {
+                    const variantName = Object.entries(combo).map(([key,value])=>value).join('/');
+                    // console.log(variantName);
+                    
+                previewHTML += `<li class="list-group-item"> ${variantName} </li>`;
+                });
+
+                previewHTML += `</ul>`;
+
+                document.getElementById('previewContent').innerHTML = previewHTML;
+                const modal = new bootstrap.Modal(document.getElementById('variantPreviewModal'));
+                modal.show();
+
+        });
+
+        function collectAttributeData()
+        {
+            const attributes = {};
+
+            document.querySelectorAll('.attribute-card').forEach(card => {
+                const attributeId = card.dataset.attributeId;
+                const attributeName = card.querySelector('.attribute-name').value;
+                
+            if(attributeName.trim() === "")
+            {
+                return;
+            }
+
+            const values =[];
+
+            card.querySelectorAll('.attribute-value').forEach(input => {
+                
+            if(input.value.trim() !== "")
+            {
+                values.push(input.value.trim());
+            }
+
+            });
+
+            if(values.length>0)
+            {
+                attributes[attributeName] = values;
+            }
+
+            });
+
+            return attributes;
+        }
+
+        function GenerateAndDisplayVariants()
+        {
+            const attributes = collectAttributeData();
+            const combinations = GenerateCombinations(attributes);
+            
+            const variantsTable = document.getElementById('variantsTable');
+            const variantsTableBody = document.getElementById('variantsTableBody');
+            const bulkActionsSection = document.getElementById('bulkActionsSection');
+            
+            variantsTableBody.innerHTML = '';
+            
+            combinations.forEach((combo,index)=> {
+                const row = document.createElement('tr');
+
+                const variantName = Object.entries(combo).map(([key,value])=> value).join('/');
+
+                const attributesInput = Object.entries(combo).map(([key,value])=> `<input type="hidden" name="variants[${index}][attributes][${key}]" value="${value}">`).join("");
+
+            const basePrice = document.getElementById('original_price').value || 0;
+
+
+
+
+
+            row.innerHTML = 
+            `
+                <td>${variantName}${attributesInput}</td>
+                
+                <td> <input type="text" class="form-control varaint-sku" name="variants[${index}][sku]" placeholder=Enter Your SKU"></td>
+                
+                <td> <input type="number" step="0.01" class="form-control varaint-price" name="variants[${index}][original_price]" value="${basePrice}" placeholder=Enter Your Original Price"></td>
+
+                <td> <input type="number" step="0.01" class="form-control varaint-sale-price" name="variants[${index}][sale_price]" placeholder=Enter Your Sale Price"></td>
+                
+                <td> <input type="number" min="0" class="form-control varaint-quantity" name="variants[${index}][quantity]" placeholder=Enter Your Quantity" value="0"></td>
+
+                <td> <button type="button" class="btn btn-sm btn-outline-danger remove-variant">Remove</button> </td>
+            `;
+            variantsTableBody.appendChild(row);
+            });
+            
+            if(combinations.length >0)
+            {
+                variantsTable.style.display = "table";
+                bulkActionsSection.style.display = "block";
+
+                document.querySelectorAll('.remove-variant').forEach(button => {
+                    button.addEventListener('click',function(){
+                        this.closest('tr').remove();
+
+                    if(variantsTableBody.children.length === 0 )
+                    {
+                        variantsTable.style.display = "none";
+                        bulkActionsSection.style.display = "none";
+                    }
+                    }); 
+                });
+
+                document.querySelectorAll('.variant-sku').forEach((input,index)=> {
+                    const baseSKU = document.getElementById('sku').value;
+
+                if(baseSKU)
+                {
+                    input.value = baseSKU + '-' + (index+1);
+                }
+
+                });
+
+                setupBulkActions();
+            }
+        }
+
+        function setupBulkActions()
+        {
+            document.getElementById('applyBulkOriginalPrice').addEventListener('click',function(){
+                const value = document.getElementById('bulkOriginalPrice').value;
+
+            if(value)
+            {
+                document.querySelectorAll('.variant-price').forEach(input =>{
+                    input.value = value;
+                });
+            }
             
         });
+
+        document.getElementById('applyBulkSalePrice').addEventListener('click',function(){
+            const value = document.getElementById('bulkSalePrice').value;
+            document.querySelectorAll('.variant-sale-price').forEach(input => {
+                input.value = value;
+            });
+        });
+
+
+        document.getElementById('applyBulkQuantity').addEventListener('click',function()
+        {
+            const value = document.getElementById('bulkQuantity').value;
+            
+        if(value)
+        {
+            document.querySelectorAll('.variant-quantity').forEach(input => {
+                input.value = value;
+            });
+        }
+        });
+        }
+
+
+        document.getElementById('sku').addEventListener('input',function(){
+            const baseSKU = this.value;
+
+            document.querySelectorAll('.variant-sku').forEach((input,index)=> {
+                input.value = baseSKU ? baseSKU+'-'+(index + 1): "";
+            });
+        });
+
+
+        function GenerateCombinations(attributes)
+        {
+            // console.log(attributes);
+
+            const keys = Object.keys(attributes);
+
+        if(keys.length === 0)
+        {
+            return [];
+        }
+
+        let combinations = attributes[keys[0]].map(value => ({[keys[0]]:value}));
+
+
+        for(let i=1; i<keys.length; i++)
+        {
+            const currentKey = keys[i];
+            const currentValues = attributes[currentKey];
+
+
+
+            const newCombinations = [];
+
+            combinations.forEach(combo => {
+                currentValues.forEach(values => {
+                    newCombinations.push({...combo,[currentKey]:values});
+                });
+            });
+
+            combinations = newCombinations;
+            console.log(combinations);
+        }
+        return combinations;
+            
+        }
+
 
 
     })
