@@ -355,7 +355,8 @@
             
             card.querySelectorAll('.remove-option').forEach(button => 
             {
-                button.addEventListener('click', function() {
+                button.addEventListener('click', function() 
+                {
                     this.closest('.attribute-value-row').remove();
                 });
             });
