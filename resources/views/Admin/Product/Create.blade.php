@@ -260,12 +260,14 @@
 
 <script>
 
-    document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('DOMContentLoaded', function() 
+    {
 
         const hasVariantsCheckbox = document.getElementById('has_variants');
         const attributeOptionsSection = document.getElementById('attributeOptionsSection');
         
-        hasVariantsCheckbox.addEventListener('change', function() {
+        hasVariantsCheckbox.addEventListener('change', function() 
+        {
             attributeOptionsSection.style.display = this.checked ? 'block' : 'none';
             
             if (this.checked && document.querySelectorAll('.attribute-card').length === 0) 
@@ -274,7 +276,8 @@
             }
         });
         
-        document.getElementById('addAttributeType').addEventListener('click', function() {
+        document.getElementById('addAttributeType').addEventListener('click', function() 
+        {
             addAttributeCard();
         });
         
@@ -474,7 +477,8 @@
                 
                 document.querySelectorAll('.remove-variant').forEach(button => 
                 {
-                    button.addEventListener('click', function() {
+                    button.addEventListener('click', function() 
+                    {
                         this.closest('tr').remove();
                         
                         if (variantsTableBody.children.length === 0) 
