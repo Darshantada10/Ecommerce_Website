@@ -581,3 +581,36 @@
 
 </script>
 @endsection
+
+
+{{-- <input type="text" id="searchBar" placeholder="Search products..." />
+<button id="voiceSearchBtn">🎤</button>
+<div id="results"></div>
+
+<script>
+  const searchBar = document.getElementById('searchBar');
+  const voiceSearchBtn = document.getElementById('voiceSearchBtn');
+
+  voiceSearchBtn.addEventListener('click', () => {
+    const recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+    recognition.lang = 'en-US';
+    recognition.start();
+
+    recognition.onresult = (event) => {
+      const transcript = event.results[0][0].transcript;
+      searchBar.value = transcript;
+      searchProducts(transcript);
+    };
+
+    recognition.onerror = (event) => {
+      console.error('Voice recognition error:', event.error);
+    };
+  });
+
+  function searchProducts(query) {
+    // Simulating product search (replace with actual API/database call)
+    const products = ['Laptop', 'Mobile', 'Headphones', 'Smartwatch'];
+    const results = products.filter(product => product.toLowerCase().includes(query.toLowerCase()));
+    document.getElementById('results').innerHTML = results.length ? results.join('<br>') : 'No products found';
+  }
+</script> --}}

@@ -98,7 +98,7 @@ class ProductController extends Controller
             {
                 $attributes =[];
                 
-                dd($request->attribute_names,$request->attribute_values);
+                // dd($request->attribute_names,$request->attribute_values);
                 foreach($request->attribute_names as $index => $name)
                 {
                     $attributes[$name] = $request->attribute_values[$index];
@@ -107,7 +107,7 @@ class ProductController extends Controller
                 $product->attributes = json_encode($attributes);
             }
             $product->save();
-            // dd($product);
+            // dd($product,$request);
             if($request->has_variants && $request->variants)
             {
                 foreach($request->variants as $data)

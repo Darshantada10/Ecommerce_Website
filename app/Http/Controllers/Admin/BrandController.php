@@ -56,7 +56,7 @@ class BrandController extends Controller
     //     $brand->forceDelete();
     // }
     public function Save(Request $request)
-    {
+    {dd($request);
         if($request->hasFile('logo'))
         {
             $path = public_path('logo');
