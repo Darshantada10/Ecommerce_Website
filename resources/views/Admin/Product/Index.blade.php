@@ -21,9 +21,10 @@
           <tr class="text-nowrap">
             <th>ID</th>
             <th>Name</th>
+            <th>Original Price</th>
+            <th>Sale Price</th>
             <th>Category Name</th>
-            <th>Brand Name</th>
-            <th>Logo</th>
+            <th>Product Image</th>
             <th>Description</th>
             <th>Action</th>
           </tr>
@@ -31,13 +32,14 @@
         <tbody>
             @foreach ($products as $product)
                 
-            {{-- <tr>
+            <tr>
                 <th>{{$product->id}}</th>
                 <th>{{$product->name}}</th>
-                <th>{{$product->slug}}</th>
+                <th>{{$product->original_price}}</th>
+                <th>{{$product->sale_price}}</th>
                 <th>{{$product->category->name}}</th>
                 <th>
-                    <img src="{{asset($product->logo)}}" alt="product Image" height="80px">
+                    <img src="{{asset($product->image)}}" alt="product Image" height="80px">
                 </th>
                 <th>{{$product->description}}</th>
                 <th>
@@ -47,7 +49,7 @@
                     
                 </th>
                 
-            </tr> --}}
+            </tr>
             
             @endforeach
             
