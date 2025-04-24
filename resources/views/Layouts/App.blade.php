@@ -16,7 +16,7 @@
 <link rel="stylesheet" href="{{asset('FrontEnd/assets/css/style.css')}}">
 <link rel="stylesheet" href="{{asset('FrontEnd/assets/css/responsive.css')}}">
 </head>
-<body class="template-index belle template-index-belle">
+<body class="template-index belle home4-fullwidth">
 <div id="pre-loader">
     <img src="{{asset('FrontEnd/assets/images/loader.gif')}}" alt="Loading..." />
 </div>
