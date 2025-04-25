@@ -10,9 +10,12 @@ use App\Http\Controllers\Admin\EmployeeController;
 use App\Http\Controllers\Admin\HeroSectionController;
 use App\Http\Controllers\Admin\JSTaskController;
 use App\Http\Controllers\Admin\ProductController;
+use App\Http\Controllers\ProductController as ControllersProductController;
 
 Route::get('/',[HomeController::class,'Index'])->name('index');
 Route::get('/home',[HomeController::class,'Index'])->name('home');
+
+Route::get('/product/{slug}/{id}',[ControllersProductController::class,'Index']);
 
 Route::get('/login',[AuthController::class,'Login'])->name('login')->middleware('guest');
 Route::post('/login',[AuthController::class,'VerifyUser'])->middleware('guest');
