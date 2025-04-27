@@ -14,4 +14,9 @@ class ProductController extends Controller
         // dd($product);
         return view('Product.Index',compact('product'));
     }
+
+    public function AddToCart(Request $request)
+    {
+        dd($request);
+    }
 }

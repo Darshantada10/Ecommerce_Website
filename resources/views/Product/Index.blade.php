@@ -121,8 +121,9 @@
                     <div class="product-single__description rte">
                         <p>{{$product->description}}</p>
                     </div>
-                    {{-- <form method="post" action="http://annimexweb.com/cart/add" id="product_form_10508262282" accept-charset="UTF-8" class="product-form product-form-product-template hidedropdown" enctype="multipart/form-data">
-                        <div class="swatch clearfix swatch-0 option1" data-option-index="0">
+
+                    <form method="post" action="http://annimexweb.com/cart/add" id="product_form_10508262282" accept-charset="UTF-8" class="product-form product-form-product-template hidedropdown" enctype="multipart/form-data">
+                        {{-- <div class="swatch clearfix swatch-0 option1" data-option-index="0">
                             <div class="product-form__item">
                               <label class="header">Color: <span class="slVariant">Red</span></label>
                               <div data-value="Black" class="swatch-element color black available">
@@ -147,26 +148,102 @@
                               </div>
                             </div>
                         </div>
-                        <p class="infolinks"><a href="#sizechart" class="sizelink btn"> Size Guide</a> <a href="#productInquiry" class="emaillink btn"> Ask About this Product</a></p>
+                        <p class="infolinks"><a href="#sizechart" class="sizelink btn"> Size Guide</a> <a href="#productInquiry" class="emaillink btn"> Ask About this Product</a></p> --}}
                         <!-- Product Action -->
+
+                        <input type="hidden" name="productid" id="productid" value="{{$product->id}}">
+
                         <div class="product-action clearfix">
                             <div class="product-form__item--quantity">
                                 <div class="wrapQtyBtn">
                                     <div class="qtyField">
-                                        <a class="qtyBtn minus" href="javascript:void(0);"><i class="fa anm anm-minus-r" aria-hidden="true"></i></a>
+                                        <a class="qtyBtn minus" id="minusbutton" href="javascript:void(0);">
+                                            <i class="fa anm anm-minus-r" aria-hidden="true"></i>
+                                        </a>
                                         <input type="text" id="Quantity" name="quantity" value="1" class="product-form__input qty">
-                                        <a class="qtyBtn plus" href="javascript:void(0);"><i class="fa anm anm-plus-r" aria-hidden="true"></i></a>
+                                        <a class="qtyBtn plus" id="plusbutton" href="javascript:void(0);">
+                                            <i class="fa anm anm-plus-r" aria-hidden="true"></i>
+                                        </a>
                                     </div>
                                 </div>
                             </div>                                
                             <div class="product-form__item--submit">
-                                <button type="button" name="add" class="btn product-form__cart-submit">
+                                <button type="button" name="add" class="btn product-form__cart-submit" id="addtocart">
                                     <span>Add to cart</span>
                                 </button>
                             </div>
                         </div>
                         <!-- End Product Action -->
-                    </form> --}}
+                    </form>
+
+<script>
+
+    document.addEventListener("DOMContentLoaded",function(){
+        // const CartButton = document.querySelector(".product-form__vart-submit");
+        
+        const CartButton = document.getElementById("addtocart");
+    const quantityInput = document.getElementById("Quantity");
+    const plusBtn = document.getElementById("plusbutton");
+    const minusBtn = document.getElementById("minusbutton");
+    const productid = document.getElementById("productid").value;
+    // console.log(productid);
+    // var csrf = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
+    // console.log(csrf);
+    
+    // Event listener for plus button
+    plusBtn.addEventListener("click", function() {
+        console.log("inside plus");
+        
+        let currentValue = parseInt(quantityInput.value);
+        quantityInput.value = currentValue + 1;
+    });
+    
+    // Event listener for minus button
+    minusBtn.addEventListener("click", function() {
+        let currentValue = parseInt(quantityInput.value);
+        // Prevent going below 1
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+        }
+    });
+
+    // Original cart button functionality
+    CartButton.addEventListener("click", function() {
+        let Quantity = document.getElementById("Quantity").value || 1;
+        console.log(Quantity);
+       
+        const CartData = {
+        product_id: productid,
+        quantity: Quantity
+    };
+    
+    fetch('/add-to-cart',{
+        method: "POST",
+        headers: { 
+            'Content-Type':'application/json','X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+        },
+        body: JSON.stringify(CartData)
+    }).then(response => response.json()).then(data => {
+        console.log("Cart Updated Succesfully",data);
+        alert('product added to cart');
+    }).catch(error=>{
+        console.error("error adding to cart",error);
+        alert('failed to add product to cart');
+    });
+    });
+
+
+    
+    
+
+    });
+
+    
+    
+</script>
+
+
+
                     <div class="display-table shareRow">
                             <div class="display-table-cell medium-up--one-third">
                                 <div class="wishlist-btn">

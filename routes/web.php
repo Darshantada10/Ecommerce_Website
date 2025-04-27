@@ -15,6 +15,9 @@ use App\Http\Controllers\ProductController as ControllersProductController;
 Route::get('/',[HomeController::class,'Index'])->name('index');
 Route::get('/home',[HomeController::class,'Index'])->name('home');
 
+
+Route::post('/add-to-cart',[ControllersProductController::class,'AddToCart']);
+
 Route::get('/product/{slug}/{id}',[ControllersProductController::class,'Index']);
 
 Route::get('/login',[AuthController::class,'Login'])->name('login')->middleware('guest');
