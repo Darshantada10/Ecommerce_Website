@@ -19,15 +19,18 @@ return new class extends Migration
             $table->string('name');
             $table->string('slug')->unique();
             $table->text('description')->nullable();
-            $table->decimal('original_price',10,4);
-            $table->decimal('sale_price',10,4)->nullable();
+            $table->decimal('original_price',10,2);
+            $table->decimal('sale_price',10,2)->nullable();
             $table->string('image')->nullable();
             $table->json('gallery')->nullable();
             $table->boolean('status')->default(true)->comment('true is visible and false is not visible');
             $table->string('sku')->unique()->nullable();
             
-            $table->boolean('has_variants')->default(false)->comment('false is no variant');
+            $table->integer('quantity')->default(0);
             $table->json('attributes')->nullable();
+
+            // $table->boolean('has_variants')->default(false)->comment('false is no variant');
+            // $table->json('attributes')->nullable();
             
             $table->foreign('category_id')->references('id')->on('categories');
             $table->foreign('brand_id')->references('id')->on('brands');

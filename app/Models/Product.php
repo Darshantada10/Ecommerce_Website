@@ -22,16 +22,16 @@ class Product extends Model
         'gallery',
         'status',
         'sku',
-        'has_variants',
+        'quantity',
         'attributes',
     ];
     protected $casts = [
         'gallery' => 'array',
         'attributes' => 'array',
         'status' => 'boolean',
-        'has_variants' => 'boolean',
-        'original_price' => 'decimal:4',
-        'sale_price' => 'decimal:4',
+        // 'has_variants' => 'boolean',
+        'original_price' => 'decimal:2',
+        'sale_price' => 'decimal:2',
     ];
     public function category()
     {
