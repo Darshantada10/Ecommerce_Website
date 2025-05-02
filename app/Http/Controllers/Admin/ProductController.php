@@ -172,23 +172,63 @@ class ProductController extends Controller
         //     $data['gallery'] = json_encode($gallerypaths);
         // }
 
-        $format =[];
+        // $format =[];
 
-        foreach($request->input('attributes',[]) as $attr)
+        // foreach($request->input('attributes',[]) as $attr)
+        // {
+        //     if(!empty($attr['key']) && !empty($attr['value']))
+        //     {
+        //         $format[$attr['key']] = $attr['value'];
+        //     }
+        // }
+        
+        // $data['attributes'] = json_encode($format);
+        
+        $attributes = [];
+
+        foreach ($request->input('attributes',[]) as $attr) 
         {
             if(!empty($attr['key']) && !empty($attr['value']))
             {
-                $format[$attr['key']] = $attr['value'];
+                $key = trim($attr['key']);
+                $value = trim($attr['value']);
+
+                if(isset($attributes[$key]))
+                {
+                    if(is_array($attributes[$key]))
+                    {
+                        $attributes[$key][] = $value;
+                    }
+                    else
+                    {
+                        $attributes[$key] = [$attributes[$key],$value];
+                    }
+                }
+                else
+                {
+                    $attributes[$key] = $value;
+                }
             }
         }
+        // dd($key,$value);
         
-        $data['attributes'] = json_encode($format);
+        $data['attributes'] = json_encode($attributes);
+
+        
         // dd($data);
         
         $product->update($data);
         // Product::create($data);
 
-        return redirect()->route('admin.all.products')->with('success','Product Updated Successfully');
+        return redirect()->route('admin.all.products')->with( 'success','Product Updated Successfully');
+    }
+
+    public function Delete($id)
+    {
+        $data = Product::findOrFail($id);
+        $data->delete();
+        return redirect()->route('admin.all.products')->with( 'success','Product Deleted Successfully');
+
     }
 
     // public function Save(Request $request)

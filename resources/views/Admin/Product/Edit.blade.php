@@ -165,27 +165,99 @@
                         $index = 0;
                     @endphp
 
+                    @if (count($attributes)>0)
+
                     @foreach ($attributes as $key => $value)
 
-                    <div class="row mb-3">
-                        <label class="col-sm-2 col-form-label">Attribute 1</label>
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control" name="attributes[{{$index}}][key]" value="{{$key}}" placeholder="Attribute Name (eg. Color, Model, Size)">
-                            @error('attributes.{{$index}}.key')
-                                <small class="text-danger">{{$message}}</small>
-                            @enderror
+                        @if (is_array($value))
+
+                        @foreach ($value as $singleValue)
+                            
+                            <div class="row mb-3 attribute-row">
+
+                            <label class="col-sm-2 col-form-label">Attribute {{$index+1}}</label>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="attributes[{{$index}}][key]" value="{{$key}}" placeholder="Attribute Name (eg. Color, Model, Size)">
+                                    @error('attributes.{{$index}}.key')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="col-sm-4">
+                                    <input type="text" class="form-control" name="attributes[{{$index}}][value]" value="{{$singleValue}}" placeholder="Attribute Value (eg. Red, 8GB+128GB, M)">
+                                    @error('attributes.{{$index}}.value')
+                                        <small class="text-danger">{{$message}}</small>
+                                    @enderror
+                                </div>
+
+                                <div class="col-sm-2">
+                                    <button type="button" class="btn btn-danger btn-sm remove-attribute">
+                                        <i class="bx bx-trash"></i>Remove
+                                    </button>
+                                </div>
+
+                            </div>
+
+                            @php $index++; @endphp
+
+                        @endforeach
+
+                        @else
+                        
+                        <div class="row mb-3 attribute-row">
+                            <label class="col-sm-2 col-form-label">Attribute {{$index+1}}</label>
+                            <div class="col-sm-4 ">
+                                <input type="text" class="form-control" name="attributes[{{$index}}][key]" value="{{$key}}" placeholder="Attribute Name (eg. Color, Model, Size)">
+                                @error('attributes.{{$index}}.key')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="attributes[{{$index}}][value]" value="{{$value}}" placeholder="Attribute Value (eg. Red, 8GB+128GB, M)">
+                                @error('attributes.{{$index}}.value')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-danger btn-sm remove-attribute">
+                                    <i class="bx bx-trash"></i>Remove
+                                </button>
+                            </div>
                         </div>
-                        <div class="col-sm-5">
-                            <input type="text" class="form-control" name="attributes[{{$index}}][value]" value="{{$value}}" placeholder="Attribute Value (eg. Red, 8GB+128GB, M)">
-                            @error('attributes.{{$index}}.value')
-                                <small class="text-danger">{{$message}}</small>
-                            @enderror
+
+                        @php $index++; @endphp
+                    
+                    @endif
+
+                    @endforeach
+
+                    @else
+
+                    <div id="attributes-container">
+                        <div class="row mb-3 attribute-row">
+                            <label class="col-sm-2 col-form-label">Attribute 1</label>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="attributes[0][key]" placeholder="Attribute Name (eg. Color, Model, Size)">
+                                @error('attributes.0.key')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
+                            </div>
+                            <div class="col-sm-4">
+                                <input type="text" class="form-control" name="attributes[0][value]" placeholder="Attribute Value (eg. Red, 8GB+128GB, M)">
+                                @error('attributes.0.value')
+                                    <small class="text-danger">{{$message}}</small>
+                                @enderror
+                            </div>
+                            <div class="col-sm-2">
+                                <button type="button" class="btn btn-danger btn-sm remove-attribute">
+                                    <i class="bx bx-trash"></i>Remove
+                                </button>
+                            </div>
                         </div>
                     </div>
 
-                    @php $index++; @endphp
-                    
-                    @endforeach
+                    @endif
 
 
                     {{-- <div class="row mb-3">
@@ -215,35 +287,52 @@
                 <script>
 
                     let attributeindex = {{$index ?? 0}};
+                    // let attributeindex = {{$index > 0 ? $index :1}};
 
                     function addAttribute()
                     {
                         // console.log("inside");
                         const container = document.getElementById('attributes-container');
                         const div = document.createElement('div');
-                        div.className = 'row mb-3';
+                        div.className = 'row mb-3 attribute-row';
 
                         div.innerHTML = `
-                                            <div class="row mb-3">
                                                 <label class="col-sm-2 col-form-label">Attribute ${attributeindex+1}</label>
-                                                <div class="col-sm-5">
+                                                <div class="col-sm-4">
                                                     <input type="text" class="form-control" name="attributes[${attributeindex}][key]" placeholder="Attribute Name (eg. Color, Model, Size)">
                                                     @error('attributes.0.key')
                                                         <small class="text-danger">{{$message}}</small>
                                                     @enderror
                                                 </div>
-                                                <div class="col-sm-5">
+                                                <div class="col-sm-4">
                                                     <input type="text" class="form-control" name="attributes[${attributeindex}][value]" placeholder="Attribute Value (eg. Red, 8GB+128GB, M)">
                                                     @error('attributes.0.value')
                                                         <small class="text-danger">{{$message}}</small>
                                                     @enderror
                                                 </div>
-                                            </div>
+                                                <div class="col-sm-2">
+                                                    <button type="button" class="btn btn-danger btn-sm remove-attribute">
+                                                        <i class="bx bx-trash"></i>Remove
+                                                    </button>
+                                                </div>
                                         `;
                             container.appendChild(div);
                             attributeindex++;
                     }
 
+                    function AddRemoveListeners()
+                    {
+                        document.querySelectorAll('.remove-attribute').forEach(button => 
+                        {
+                            button.addEventListener('click',function(){
+                                this.closest('.attribute-row').remove();
+                            });
+                        });
+                    }
+
+                    document.addEventListener('DOMContentLoaded',function(){
+                        AddRemoveListeners();
+                    })
 
 
                 </script>

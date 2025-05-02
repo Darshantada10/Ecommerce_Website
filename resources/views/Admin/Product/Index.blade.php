@@ -39,7 +39,7 @@
                 <th>{{$product->sale_price}}</th>
                 <th>{{$product->category->name}}</th>
                 <th>
-                    <img src="{{asset($product->image)}}" alt="product Image" height="80px">
+                    <img src="{{asset('storage/'.$product->image)}}" alt="product Image" height="80px">
                 </th>
                 <th>{{$product->description}}</th>
                 <th>
