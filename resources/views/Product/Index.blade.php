@@ -12,9 +12,17 @@
                 <div class="col-lg-6 col-md-6 col-sm-12 col-12">
                     <div class="product-details-img product-single__photos bottom">
                         <div class="zoompro-wrap product-zoom-right pl-20">
+                            @if ($product->image)
                             <div class="zoompro-span">
                                 <img class="blur-up lazyload zoompro" data-zoom-image="{{asset('/storage/'.$product->image)}}" alt="" src="{{asset('/storage/'.$product->image)}}" width="400px" />               
                             </div>
+                                
+                            @else
+                            <div class="zoompro-span">
+                                <img class="blur-up lazyload zoompro" data-zoom-image="https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small_2x/no-image-available-icon-vector.jpg" alt="" src="https://static.vecteezy.com/system/resources/thumbnails/022/059/000/small_2x/no-image-available-icon-vector.jpg" width="400px" />               
+                            </div>
+                                
+                            @endif
                             <div class="product-labels">
                                 @if ($product->original_price == $product->sale_price)
                                 <span class="lbl pr-label1">new</span>
@@ -39,14 +47,17 @@
                                     // dd($gallery) 
                                 @endphp
                                 {{-- {{dd($product->gallery)}} --}}
-                                @foreach ($gallery as $image)
+                                @if (isset($gallery))
                                     
+                                @foreach ($gallery as $image)
+                                
                                 <a data-image="{{asset('/storage/'.$image)}}" data-zoom-image="{{asset('/storage/'.$image)}}" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
                                     <img class="blur-up lazyload" src="{{asset('/storage/'.$image)}}" alt="" />
                                 </a>
                                 
                                 @endforeach
                                 
+                                @endif
                                 
                             </div>
                         </div>
