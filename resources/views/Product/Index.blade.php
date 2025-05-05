@@ -13,7 +13,7 @@
                     <div class="product-details-img product-single__photos bottom">
                         <div class="zoompro-wrap product-zoom-right pl-20">
                             <div class="zoompro-span">
-                                <img class="blur-up lazyload zoompro" data-zoom-image="{{asset('FrontEnd/assets/images/product-detail-page/cape-dress-1.jpg')}}" alt="" src="{{asset('FrontEnd/assets/images/product-detail-page/cape-dress-1.jpg')}}" />               
+                                <img class="blur-up lazyload zoompro" data-zoom-image="{{asset('/storage/'.$product->image)}}" alt="" src="{{asset('/storage/'.$product->image)}}" width="400px" />               
                             </div>
                             <div class="product-labels">
                                 @if ($product->original_price == $product->sale_price)
@@ -29,20 +29,32 @@
                         </div>
                         <div class="product-thumb product-thumb-1">
                             <div id="gallery" class="product-dec-slider-1 product-tab-left">
-                                <a data-image="{{asset('FrontEnd/assets/images/product-detail-page/cape-dress-1.jpg')}}" data-zoom-image="{{asset('FrontEnd/assets/images/product-detail-page/cape-dress-1.jpg')}}" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
-                                    <img class="blur-up lazyload" src="{{asset('FrontEnd/assets/images/product-detail-page/cape-dress-1.jpg')}}" alt="" />
+
+                                <a data-image="{{asset('/storage/'.$product->image)}}" data-zoom-image="{{asset('/storage/'.$product->image)}}" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
+                                    <img class="blur-up lazyload" src="{{asset('/storage/'.$product->image)}}" alt="" />
                                 </a>
-                                <a data-image="{{asset('FrontEnd/assets/images/product-detail-page/cape-dress-2.jpg')}}" data-zoom-image="{{asset('FrontEnd/assets/images/product-detail-page/cape-dress-2.jpg')}}" class="slick-slide slick-cloned" data-slick-index="-3" aria-hidden="true" tabindex="-1">
-                                    <img class="blur-up lazyload" src="{{asset('FrontEnd/assets/images/product-detail-page/cape-dress-2.jpg')}}" alt="" />
+
+                                @php
+                                    $gallery = json_decode($product->gallery);
+                                    // dd($gallery) 
+                                @endphp
+                                {{-- {{dd($product->gallery)}} --}}
+                                @foreach ($gallery as $image)
+                                    
+                                <a data-image="{{asset('/storage/'.$image)}}" data-zoom-image="{{asset('/storage/'.$image)}}" class="slick-slide slick-cloned" data-slick-index="-4" aria-hidden="true" tabindex="-1">
+                                    <img class="blur-up lazyload" src="{{asset('/storage/'.$image)}}" alt="" />
                                 </a>
+                                
+                                @endforeach
+                                
                                 
                             </div>
                         </div>
-                        <div class="lightboximages">
+                        {{-- <div class="lightboximages">
                             <a href="{{asset('FrontEnd/assets/images/product-detail-page/camelia-reversible-big1.jpg')}}" data-size="1462x2048"></a>
                             <a href="{{asset('FrontEnd/assets/images/product-detail-page/camelia-reversible-big2.jpg')}}" data-size="1462x2048"></a>
                             
-                        </div>
+                        </div> --}}
 
                     </div>
                     <!--Product Feature-->
