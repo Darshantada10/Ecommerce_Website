@@ -145,61 +145,113 @@
                         <p>{{$product->description}}</p>
                     </div>
 
-                    <form method="post" action="http://annimexweb.com/cart/add" id="product_form_10508262282" accept-charset="UTF-8" class="product-form product-form-product-template hidedropdown" enctype="multipart/form-data">
-                        {{-- <div class="swatch clearfix swatch-0 option1" data-option-index="0">
-                            <div class="product-form__item">
-                              <label class="header">Color: <span class="slVariant">Red</span></label>
-                              <div data-value="Black" class="swatch-element color black available">
-                                <input class="swatchInput" id="swatch-0-black" type="radio" name="option-0" value="Black"><label class="swatchLbl color small" for="swatch-0-black" style="background-color:black;" title="Black"></label>
-                              </div>
-                              <div data-value="Maroon" class="swatch-element color maroon available">
-                                <input class="swatchInput" id="swatch-0-maroon" type="radio" name="option-0" value="Maroon"><label class="swatchLbl color small" for="swatch-0-maroon" style="background-color:maroon;" title="Maroon"></label>
-                              </div>
-                              <div data-value="Blue" class="swatch-element color blue available">
-                                <input class="swatchInput" id="swatch-0-blue" type="radio" name="option-0" value="Blue"><label class="swatchLbl color small" for="swatch-0-blue" style="background-color:blue;" title="Blue"></label>
-                              </div>
-                              <div data-value="Dark Green" class="swatch-element color dark-green available">
-                                <input class="swatchInput" id="swatch-0-dark-green" type="radio" name="option-0" value="Dark Green"><label class="swatchLbl color small" for="swatch-0-dark-green" style="background-color:darkgreen;" title="Dark Green"></label>
-                              </div>
-                            </div>
+                    {{-- <div class="swatch clearfix swatch-0 option1" data-option-index="0">
+                        <div class="product-form__item">
+                          <label class="header">Color: <span class="slVariant">Red</span></label>
+                          <div data-value="Black" class="swatch-element color black available">
+                            <input class="swatchInput" id="swatch-0-black" type="radio" name="option-0" value="Black"><label class="swatchLbl color small" for="swatch-0-black" style="background-color:black;" title="Black"></label>
+                          </div>
+                          <div data-value="Maroon" class="swatch-element color maroon available">
+                            <input class="swatchInput" id="swatch-0-maroon" type="radio" name="option-0" value="Maroon"><label class="swatchLbl color small" for="swatch-0-maroon" style="background-color:maroon;" title="Maroon"></label>
+                          </div>
+                          <div data-value="Blue" class="swatch-element color blue available">
+                            <input class="swatchInput" id="swatch-0-blue" type="radio" name="option-0" value="Blue"><label class="swatchLbl color small" for="swatch-0-blue" style="background-color:blue;" title="Blue"></label>
+                          </div>
+                          <div data-value="Dark Green" class="swatch-element color dark-green available">
+                            <input class="swatchInput" id="swatch-0-dark-green" type="radio" name="option-0" value="Dark Green"><label class="swatchLbl color small" for="swatch-0-dark-green" style="background-color:darkgreen;" title="Dark Green"></label>
+                          </div>
                         </div>
-                        <div class="swatch clearfix swatch-1 option2" data-option-index="1">
-                            <div class="product-form__item">
-                              <label class="header">Size: <span class="slVariant">XS</span></label>
-                              <div data-value="X-Small" class="swatch-element x-small available">
-                                <input class="swatchInput" id="swatch-1-x-small" type="radio" name="option-1" value="X-Small"><label class="swatchLbl small rounded" for="swatch-1-x-small" title="X-Small">X-Small</label>
-                              </div>
-                            </div>
+                    </div>
+                    <div class="swatch clearfix swatch-1 option2" data-option-index="1">
+                        <div class="product-form__item">
+                          <label class="header">Size: <span class="slVariant">XS</span></label>
+                          <div data-value="X-Small" class="swatch-element x-small available">
+                            <input class="swatchInput" id="swatch-1-x-small" type="radio" name="option-1" value="X-Small"><label class="swatchLbl small rounded" for="swatch-1-x-small" title="X-Small">X-Small</label>
+                          </div>
                         </div>
-                        <p class="infolinks"><a href="#sizechart" class="sizelink btn"> Size Guide</a> <a href="#productInquiry" class="emaillink btn"> Ask About this Product</a></p> --}}
-                        <!-- Product Action -->
+                    </div>
+                    <p class="infolinks"><a href="#sizechart" class="sizelink btn"> Size Guide</a> <a href="#productInquiry" class="emaillink btn"> Ask About this Product</a></p> --}}
+                    <!-- Product Action -->
+                    <form method="POST" action="#" class="product-form hidedropdown" enctype="multipart/form-data">
+    @csrf
+    <input type="hidden" id="productid" value="{{ $product->id }}">
 
-                        <input type="hidden" name="productid" id="productid" value="{{$product->id}}">
+    {{-- Optional size dropdown if needed --}}
+    @if(isset($product->attributes['Size']))
+        <select id="selected_size">
+            @foreach($product->attributes['Size'] as $size)
+                <option value="{{ $size }}">{{ $size }}</option>
+            @endforeach
+        </select>
+    @endif
 
-                        <div class="product-action clearfix">
-                            <div class="product-form__item--quantity">
-                                <div class="wrapQtyBtn">
-                                    <div class="qtyField">
-                                        <a class="qtyBtn minus" id="minusbutton" href="javascript:void(0);">
-                                            <i class="fa anm anm-minus-r" aria-hidden="true"></i>
-                                        </a>
-                                        <input type="text" id="Quantity" name="quantity" value="1" class="product-form__input qty">
-                                        <a class="qtyBtn plus" id="plusbutton" href="javascript:void(0);">
-                                            <i class="fa anm anm-plus-r" aria-hidden="true"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>                                
-                            <div class="product-form__item--submit">
-                                <button type="button" name="add" class="btn product-form__cart-submit" id="addtocart">
-                                    <span>Add to cart</span>
-                                </button>
-                            </div>
-                        </div>
-                        <!-- End Product Action -->
-                    </form>
+    <div class="qtyField">
+        <a class="qtyBtn minus" id="minusbutton" href="javascript:void(0);">-</a>
+        <input type="text" id="Quantity" name="quantity" value="1" class="product-form__input qty">
+        <a class="qtyBtn plus" id="plusbutton" href="javascript:void(0);">+</a>
+    </div>
 
-<script>
+    <button type="button" class="btn product-form__cart-submit" id="addtocart">
+        <span>Add to cart</span>
+    </button>
+</form>
+
+{{-- <script>
+document.addEventListener("DOMContentLoaded", function () {
+    const CartButton = document.getElementById("addtocart");
+    const quantityInput = document.getElementById("Quantity");
+    const plusBtn = document.getElementById("plusbutton");
+    const minusBtn = document.getElementById("minusbutton");
+    const productid = document.getElementById("productid").value;
+    const selectedSizeInput = document.getElementById("selected_size");
+
+    // Quantity increment
+    plusBtn.addEventListener("click", function () {
+        let currentValue = parseInt(quantityInput.value);
+        quantityInput.value = currentValue + 1;
+    });
+
+    // Quantity decrement
+    minusBtn.addEventListener("click", function () {
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+        }
+    });
+
+    // Add to cart AJAX
+    CartButton.addEventListener("click", function () {
+        const Quantity = parseInt(quantityInput.value) || 1;
+        const selected_size = selectedSizeInput ? selectedSizeInput.value : null;
+
+        const CartData = {
+            product_id: productid,
+            quantity: Quantity,
+            selected_size: selected_size
+        };
+
+        fetch('/add-to-cart', {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+            },
+            body: JSON.stringify(CartData)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Cart Updated Successfully", data);
+            alert("Product added to cart");
+        })
+        .catch(error => {
+            console.error("Error adding to cart", error);
+            alert("Failed to add product to cart");
+        });
+    });
+});
+</script> --}}
+
+{{-- <script>
 
     document.addEventListener("DOMContentLoaded",function(){
         // const CartButton = document.querySelector(".product-form__vart-submit");
@@ -240,19 +292,19 @@
         quantity: Quantity
     };
     
-    fetch('/add-to-cart',{
-        method: "POST",
-        headers: { 
-            'Content-Type':'application/json','X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').getAttribute('content')
-        },
-        body: JSON.stringify(CartData)
-    }).then(response => response.json()).then(data => {
-        console.log("Cart Updated Succesfully",data);
-        alert('product added to cart');
-    }).catch(error=>{
-        console.error("error adding to cart",error);
-        alert('failed to add product to cart');
-    });
+    // fetch('/add-to-cart',{
+    //     method: "POST",
+    //     headers: { 
+    //         'Content-Type':'application/json','X-CSRF-TOKEN':document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+    //     },
+    //     body: JSON.stringify(CartData)
+    // }).then(response => response.json()).then(data => {
+    //     console.log("Cart Updated Succesfully",data);
+    //     alert('product added to cart');
+    // }).catch(error=>{
+    //     console.error("error adding to cart",error);
+    //     alert('failed to add product to cart');
+    // });
     });
 
 
@@ -261,10 +313,97 @@
 
     });
 
-    
+     document.getElementById("addtocart").addEventListener("click", function () {
+        const productid = document.getElementById("productid").value;
+        // const quantity = document.getElementById("Quantity").value || 1;
+        const selected_size = document.getElementById("selected_size")?.value || null;
+
+        const CartData = {
+            product_id: productid,
+            quantity: quantity,
+            selected_size: selected_size,
+        };
+
+        fetch("/add-to-cart", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+            },
+            body: JSON.stringify(CartData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Cart updated:", data);
+            alert("Product added to cart!");
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Failed to add to cart");
+        });
+    });
     
 </script>
+<script>
+   
+</script> --}}
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    const CartButton = document.getElementById("addtocart");
+    const quantityInput = document.getElementById("Quantity");
+    const plusBtn = document.getElementById("plusbutton");
+    const minusBtn = document.getElementById("minusbutton");
+    const productid = document.getElementById("productid").value;
+    const selectedSizeInput = document.getElementById("selected_size");
+
+    // Increment quantity
+    plusBtn.addEventListener("click", function () {
+        let currentValue = parseInt(quantityInput.value);
+        quantityInput.value = currentValue + 1;
+    });
+
+    // Decrement quantity
+    minusBtn.addEventListener("click", function () {
+        let currentValue = parseInt(quantityInput.value);
+        if (currentValue > 1) {
+            quantityInput.value = currentValue - 1;
+        }
+    });
+
+    // Add to Cart AJAX
+    CartButton.addEventListener("click", function () {
+        const quantity = parseInt(quantityInput.value) || 1;
+        console.log(quantity);
+        
+        const selected_size = selectedSizeInput ? selectedSizeInput.value : null;
+
+        const CartData = {
+            product_id: productid,
+            quantity: quantity,
+            selected_size: selected_size,
+        };
+
+        fetch("/add-to-cart", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "X-CSRF-TOKEN": document.querySelector('meta[name="csrf-token"]').getAttribute("content")
+            },
+            body: JSON.stringify(CartData),
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log("Cart updated:", data);
+            alert("Product added to cart!");
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("Failed to add to cart");
+        });
+    });
+});
+</script>
 
 
                     <div class="display-table shareRow">

@@ -24,6 +24,11 @@ class User extends Authenticatable
         'profile_picture'
     ];
 
+    public function carts()
+    {
+        return $this->hasMany(Cart::class);
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *
